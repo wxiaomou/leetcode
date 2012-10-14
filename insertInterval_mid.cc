@@ -17,9 +17,9 @@ public:
 			int last = -1;
 			bool inserted = false;
 
-			intervals.push_back(newInterval);
+			intervals.push_back(newInterval);// if the interval is the last interval, if it not,this can ensure that we won't access some space that is null
 			for (int i = 0; i < intervals.size(); ++i) {
-				if (i == (intervals.size() - 1) && inserted) break;
+				if (i == (intervals.size() - 1) && inserted) break;// avoid insert newInterval twice
 				Interval tmp = intervals[i];
 				if (!inserted && newInterval.start < tmp.start) {
 						inserted = true;
