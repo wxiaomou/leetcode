@@ -16,8 +16,12 @@ public:
 			if (path[i] == '/' && path[i + 1] == '/')
 				continue;
 			else {
-				while (path[j + 1] != '/'&& j < path.length() ) j++;
-				string com = path.substr(i, j - i + 1);
+				while (path[j + 1] != '/'&& j < path.length() - 1 ) j++;
+				string com;
+				if (j == path.length() - 1) 
+					com = path.substr(i);
+				else
+					com = path.substr(i, j - i + 1);
 				//cout << "!!" << path.substr(i, j - i + 1) << endl; 
 					if (com == "/..")
 						if (!stac.empty()) {
