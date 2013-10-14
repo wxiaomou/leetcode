@@ -3,43 +3,43 @@
 using namespace std;
 class Solution {
 public:
-		int n;
-		int* loc;
-		string str;
-    int numDecodings(string s) {
-			if (s.length() == 0)
-				return 0;
-			n = s.length();
-			loc = new int(n);
-			str = s;
-			for (int i = 0; i < n; ++i) loc[i] = -1;
-			int ret = recursion(0);
-			delete []loc;
-			return ret;
-
+	 int numDecodings(string s) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if (!s.length()) return 0;
+        int n = s.length();
+        int ref[n];
+        for (int i = 0; i < n; i++)
+            ref[i] = -1;
+        doRec(s, ref, 0, n);
+        return ref[0];
     }
-
-		int recursion(int i) {
-			if (i >= n)
-				return 1;
-			if (loc[i] != -1) 
-				return loc[i];
-			if (i == n - 1) {
-				loc[i] = 1;
-				return loc[i];
-			}
-			if (str[i] == '0') {
-				loc[i] = 0;
-				return loc[i];
-			}
-			int tmp = (str[i] - '0') * 10 + (str[i + 1] - '0');
-			if (tmp > 26) {
-					loc[i] = recursion(i + 1);
-			} else {
-					loc[i] = recursion(i + 1) + recursion(i + 2);
-			}
-			return loc[i];
+    int doRec(string s, int ref[], int i, const int& n) {
+        if (i >= n)
+				return 0;
+        if (i == n - 1 && s[i] != '0') {
+			ref[i] = 1;
+			return ref[i];
 		}
+		if (s[i] == '0') {
+			ref[i] = 0;
+			return ref[i];
+		}
+        if (ref[i] != -1) return ref[i];
+        if (s.length() == 1) {
+            ref[i] = 1;
+            return 1;
+        }
+        int ret = 0;
+        int fix = n - i == 2 ? 1: 0;
+        int tmp = (s[i] - '0') * 10 + (s[i + 1] - '0');
+        if (tmp <= 26) {
+            ret = doRec(s, ref, i + 2, n) + doRec(s, ref, i + 1, n) + fix;
+        } else {
+            ret = doRec(s, ref, i + 1, n);
+        }
+        ref[i] = ret;
+        return ret;
+    }
 };
 
 
