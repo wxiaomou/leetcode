@@ -30,7 +30,9 @@ public:
             return 1;
         }
         int ret = 0;
-        int fix = n - i == 2 ? 1: 0;
+        int fix = n - i == 2 ? 1: 0;// eg 11123 so if we do not have the fix;  when i == 3, tmp is 23 which will go to 
+        			    // the first block, then the doRec(s, ref, i + 2, n) will return 0, so we will miss
+        			    // one here.
         int tmp = (s[i] - '0') * 10 + (s[i + 1] - '0');
         if (tmp <= 26) {
             ret = doRec(s, ref, i + 2, n) + doRec(s, ref, i + 1, n) + fix;
