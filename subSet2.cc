@@ -33,6 +33,35 @@ public:
 		}
 		return res;
 	}
+	
+    /* Recursive way
+	 vector<vector<int> > subsetsWithDup(vector<int> &S) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        sort(S.begin(), S.end());
+        return _sub(S, 0);
+    }
+    vector<vector<int> > _sub(vector<int> &S, int i) {
+        vector<vector<int> > ret;
+        vector<vector<int> > tmp;
+        if (i == S.size()) {
+            vector<int> _null;
+            ret.push_back(_null);
+            return ret;
+        }
+        int j = i;
+        for (; j < S.size() && S[j] == S[i]; j++);
+        ret = _sub(S, j);
+        
+        for (int k = i; k <= j; k++) {
+            for (int n = 0; n < tmp.size(); n++) {
+                tmp[n].insert(tmp[n].begin(), S[i]);
+            }
+            tmp.insert(tmp.begin(), ret.begin(), ret.end());
+        }
+        return tmp;
+    }
+	*/
+	
 };
 
 int main(int argc, char **) {
