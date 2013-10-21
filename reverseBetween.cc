@@ -60,7 +60,38 @@ public:
 			return head;
     }
 };
-
+/* Add new way
+ class Solution {
+ public:
+ ListNode *reverseBetween(ListNode *head, int m, int n) {
+ // Note: The Solution object is instantiated only once and is reused by each test case.
+ if (!head) return head;
+ if (m == n) return head;
+ ListNode *pre = new ListNode(0);
+ pre->next = head;
+ ListNode *cur = pre;
+ head = pre;
+ int i = 0;
+ while (i < m - 1) {
+ i++;
+ cur = cur->next;
+ }
+ 
+ pre = cur;
+ cur = cur->next;
+ i++;
+ while (cur->next != NULL && i < n) {
+ i++;
+ ListNode *tmp = cur->next;
+ cur->next = tmp->next;
+ tmp->next = pre->next;
+ pre->next = tmp;
+ }
+ return head->next;
+ }
+ };
+ 
+ */
 int main(int argc, char **argv) {
 	ListNode *head = new ListNode(1);
 	//head->next = a;
