@@ -21,7 +21,7 @@ public:
             return;
 		}
 		int x = 0;
-		for (int i = begin; i < begin + 4 && i < s.size(); ++i) {
+		for (int i = begin; i < begin + 3 && i < s.size(); ++i) {
 			x = x * 10 + s[i] - '0';
 			string str = tmp;
 
@@ -42,37 +42,38 @@ public:
 
 // Mathod 2
 /*
- 		    vector<string> restoreIpAddresses(string s) {
-					vector<string> ret;
-					if (s.length() > 12 || s.length() < 4) return ret;
-					ret = _restore(s, 0);
+	 vector<string> restoreIpAddresses(string s) {
+	 	vector<string> ret;
+		if (s.length() > 12 || s.length() < 4) return ret;
+		ret = _restore(s, 0);
         }
-				vector<string> _restore(string s, const int k) {
-						vector<string> ret;
-						if (k >= 4 || s.size() == 0) return ret;
-						if (k == 3 && atoi(s.c_str()) <= 255) {
-   							if (s.size() > 1 && s[0] == '0') return ret;
-		            ret.push_back(s);
-								return ret;
-						}				
-						int n  = s.size();
-						for (int i = 0; i < n && i < 3; i++) {
-							int x = atoi(s.substr(0, i + 1).c_str());
-							if (x > 255)
-								break;
+	vector<string> _restore(string s, const int k) {
+		vector<string> ret;
+		if (k >= 4 || s.size() == 0) return ret;
+		if (k == 3 && atoi(s.c_str()) <= 255) {
+  			if (s.size() > 1 && s[0] == '0') return ret;
+	                ret.push_back(s);
+			return ret;
+			
+		}				
+		int n  = s.size();
+		for (int i = 0; i < n && i < 3; i++) {
+			int x = atoi(s.substr(0, i + 1).c_str());
+			if (x > 255)
+				break;
 
-							vector<string> tmp = _restore(s.substr(i + 1), k + 1);
-							for (int j = 0; j < tmp.size(); j++) {
-								char *st = itoa(x);
-								string s1 = string(st);
-								tmp[j] = s1 + "." + tmp[j];
-							}
-							ret.insert(ret.end(), tmp.begin(), tmp.end());
-							if (x == 0) break;
-						}
-						return ret;
+			vector<string> tmp = _restore(s.substr(i + 1), k + 1);
+			for (int j = 0; j < tmp.size(); j++) {
+				char *st = itoa(x);
+				string s1 = string(st);
+				tmp[j] = s1 + "." + tmp[j];
+			}
+			ret.insert(ret.end(), tmp.begin(), tmp.end());
+			if (x == 0) break;
+		}
+		return ret;
 
-				}
+	}
 
  * /
 };
