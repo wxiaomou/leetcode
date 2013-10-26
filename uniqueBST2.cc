@@ -21,7 +21,7 @@ public:
     vector<TreeNode *> doGenerateTrees(int start, int end) {
 			vector<TreeNode *> res;
 			if(start > end) {
-				res.push_back(NULL);
+				res.push_back(NULL); // Need to push NULL or the size of lef1 or right1 will be 0, and it cannot go into the for loop.
 				return res;
 			}
 			for (int i = start; i <= end; i++) {
