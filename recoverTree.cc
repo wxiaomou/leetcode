@@ -64,6 +64,46 @@ public:
 			return;
 		}
 };
+/* O(1) Solution
+
+class Solution {
+public:
+    TreeNode *pre;
+    TreeNode *p, *q;
+    void recoverTree(TreeNode *root) {
+        if (!root) return;
+        pre = NULL;
+        p = NULL;
+        q = NULL;
+        traverse(root, pre, p, q);
+        if (p && q) {
+            int tmp = p->val;
+            p->val = q->val;
+            q->val = tmp;
+        }
+    }
+
+//Inorder traverse, pre should increasing only, if failed then we find the node,
+//first time should be the node which moved from right to left. so p = pre, and second
+//time should vice versa so q = root;
+//We use pre as a pointer scan the in order traverse result, and just compare it with it right elements.
+//Pre is the one element which before root int the in order transverse.
+
+    void traverse(TreeNode *root, TreeNode *&pre, TreeNode *&p, TreeNode *&q) {
+        if (!root) return;
+        traverse(root->left, pre, p, q);
+       if (pre && pre->val > root->val) {
+           if (!p) p = pre;
+           q = root;  // in case {0,1} conner case, no else here since this will only happen just once.
+         }
+        pre = root;
+        traverse(root->right, pre, p, q);
+    }
+    
+};
+
+
+*/
 
 int main (int argc, char **argv) {
 	TreeNode *root = new TreeNode(1);
