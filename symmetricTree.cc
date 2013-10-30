@@ -30,57 +30,29 @@ public:
 			else 
 				return false;
 		}
-		// iterative way but exceed memory. need revise
+		// iterate by level and compare
     bool isSymmetric2(TreeNode *root) {
-			if (!root)
-				return true;
-			if (!root->left && !root->right)
-				return true;
-			if (!root->left || !root->right)
-				return false;
-			queue<TreeNode *> que;
-			vector<int> com;
-			int count;
-			que.push(root);
-			count = que.size();
-			TreeNode *fill = new TreeNode(-1);
-			while (!que.empty()) {
-				TreeNode *tmp = que.front();
-				if (tmp) {
-					com.push_back(tmp->val);
-					if (tmp->left)
-						que.push(tmp->left);
-					else
-						que.push(fill);
-					if (tmp->right)
-						que.push(tmp->right);
-					else
-						que.push(fill);
-				} 
-				com.push_back(tmp->val);
-				count--;
-				if (count == 0) {
-						count = que.size();
-						if (!check(com))
-							return false;
-						com.clear();
-				}
-			}
-
-			return true;
+        if (!root) return true;
+        queue<TreeNode *> l;
+        queue<TreeNode *> r;
+        l.push(root->left);
+        r.push(root->right);
+        while (l.size() && r.size()) {
+            TreeNode *left = l.front();
+            TreeNode *right = r.front();
+            l.pop();
+            r.pop();
+            if ((left && !right) || (!left && right)) return false;
+            if (left) {
+                if (left->val != right->val) return false;
+                l.push(left->left);
+                l.push(left->right);
+                r.push(right->right);// !!attention Mirror!!
+                r.push(right->left);
+            }
+        }
+        return true;
     }
-
-		bool check(vector<int> com) {
-			if (com.size() == 1)
-				return true;
-
-			for (int i = 0; i < com.size() / 2; i ++) {
-				if (com[i] != com[com.size() - 1 - i])
-					return false;
-			}
-
-			return true;
-		}
 };
 
 int main(int argc, char **argv) {
