@@ -14,7 +14,7 @@ struct TreeNode {
 class Solution {
 public:
     int minDepth(TreeNode *root) {
-					if (!root)
+			if (!root)
 				return 0;
 
 			int left = minDepth(root->left);

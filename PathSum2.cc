@@ -1,48 +1,44 @@
 /**
  * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
  */
-#include <iostream>
-#include <stddef.h>
-#include <vector>
-
-using namespace std;
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-   TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-};
 class Solution {
-public:
+    public:
     vector<vector<int> > pathSum(TreeNode *root, int sum) {
-			vector<vector<int> > res;
-			if (!root)
-				return res;
-
-			if (!root->left && !root->right && sum == root->val) {
-				vector<int> tmp(1, root->val);
-				res.push_back(tmp);
-				return res;
-			}
-
-			vector<vector<int> > ret1 = pathSum(root->left, sum - root->val);
-			if (ret1.size()) {
-				for (int i = 0; i < ret1.size(); ++i) {
-					ret1[i].insert(ret1[i].begin(), root->val);
-				}
-				res.insert(res.end(), ret1.begin(), ret1.end());
-			}
-			vector<vector<int> > ret2 = pathSum(root->right, sum - root->val);
-			if (ret2.size()) {
-				for (int i = 0; i < ret2.size(); ++i) {
-					ret2[i].insert(ret2[i].begin(), root->val);
-				}
-				res.insert(res.end(), ret2.begin(), ret2.end());
-			}
-			return res;
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        vector<vector<int> > ret;
+        if (!root) return ret;
+        vector<int> tmp;
+        _pathSum(root, sum, ret, tmp);
+        return ret;
+    }
+    
+    void _pathSum(TreeNode *root, int sum, vector<vector<int> > &ret, vector<int> &tmp) {
+        if (!root) return;
+        int _sum = sum - root->val;
+        tmp.push_back(root->val);
+        if (!_sum) {
+            if (!root->left && !root->right) {
+                ret.push_back(tmp);
+                return;
+            }
+        }
+        if (root->left) {
+            _pathSum(root->left, _sum, ret, tmp);
+            if (tmp.size())
+            tmp.pop_back();
+        }
+        if (root->right) {
+            _pathSum(root->right, _sum, ret, tmp);
+            if (tmp.size())
+            tmp.pop_back();
+        }
+        return;
     }
 };
-
-int main (int argc, char **argv) {
-	return 0;
-}
