@@ -10,33 +10,31 @@ class Solution {
     public:
     void connect(TreeLinkNode *root) {
         if (!root) return;
+        TreeLinkNode *p = NULL;
         if (root->left) {
-            if (root->right)
-            root->left->next = root->right;
-            else if (root->next){
-                //root->left->next = root->next->left ? root->next->left : root->next->right;
-                TreeLinkNode *tmp = root->next;
-                while (!tmp->left && !tmp->right && tmp->next) tmp = tmp->next;
-                if (tmp->left)
-                root->left->next = tmp->left;
-                else if (tmp->right)
-                root->left->next = tmp->right;
-                else
-                root->left->next = NULL;
+            if (root->right) {
+                root->left->next = root->right;
+                p = root->right;
+            } else {
+                p = root->left;
             }
         }
+        
         if (root->right) {
-            if (root->next) {
-                TreeLinkNode *tmp = root->next;
-                while (!tmp->left && !tmp->right && tmp->next) tmp = tmp->next;
-                if (tmp->left)
-                root->right->next = tmp->left;
-                else if (tmp->right)
-                root->right->next = tmp->right;
-                else
-                root->right->next = NULL;
-            }
+            p = root->right;
         }
+        
+        if (p && root->next) {
+            TreeLinkNode *tmp = root->next;
+            while (!tmp->left && !tmp->right && tmp->next) tmp = tmp->next;
+            if (tmp->left)
+            p->next = tmp->left;
+            else if (tmp->right)
+            p->next = tmp->right;
+            else
+            p->next = NULL;
+        }
+        
         connect(root->right);
         connect(root->left);
         
