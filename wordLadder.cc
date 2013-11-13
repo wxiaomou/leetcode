@@ -12,6 +12,7 @@ public:
             if (str == end) return len;
             q.pop();
             for (int i = 0; i < str.length(); i++) {
+                if(dict.empty()) break;
                 string bk = str;
                 for (char c = 'a'; c <= 'z'; c++) {
                     str[i] = c;
