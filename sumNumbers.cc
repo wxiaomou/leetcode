@@ -13,21 +13,20 @@ public:
         if (!root) return 0;
         vector<int> ref;
         int ret = 0;
-        _sumNumbers(root, ref, 0);
-        for (int i = 0; i < ref.size(); i++) ret += ref[i];
+        _sumNumbers(root, ret, 0);
         return ret;
     }
     
-    void _sumNumbers(TreeNode *root, vector<int> &ref, int pre) {
+    void _sumNumbers(TreeNode *root, int &ret, int pre) {
        if (!root) return;
        pre *= 10;
        pre += root->val;
        if (!root->left && !root->right) {
-           ref.push_back(pre);
-           return;
+            ret += pre;
+            return;
        }
-       if (root->left) _sumNumbers(root->left, ref, pre);
-       if (root->right) _sumNumbers(root->right, ref, pre);
+       if (root->left) _sumNumbers(root->left, ret, pre);
+       if (root->right) _sumNumbers(root->right, ret, pre);
        return;
     }
 };
