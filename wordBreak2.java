@@ -1,4 +1,4 @@
-//refs to http://www.cnblogs.com/feiling/p/3357067.html
+//refs to http://www.cnblogs.com/feiling/p/3357067.html "dp + dfs"
 public class Solution {
     public ArrayList<String> wordBreak(String s, Set<String> dict) {
         ArrayList<String> ret = new ArrayList<String>();
