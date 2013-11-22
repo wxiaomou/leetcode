@@ -34,7 +34,7 @@ class Solution {
             else
             p->next = NULL;
         }
-        
+        //right first
         connect(root->right);
         connect(root->left);
         
