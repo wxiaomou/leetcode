@@ -1,3 +1,4 @@
+// Reference to http://polythinking.wordpress.com/2013/06/09/leetcode-word-ladder/
 class Solution {
 public:
     int ladderLength(string start, string end, unordered_set<string> &dict) {
