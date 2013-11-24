@@ -23,7 +23,8 @@ public:
         stack<pair<TreeNode *, bool> > s;
         s.push(pair<TreeNode *, bool>(root, false));
         while (s.size()) {
-            pair<TreeNode *, bool> &tmp = s.top(); //!!!need to be refernece other the line 39 won't chage the second part
+            pair<TreeNode *, bool> &tmp = s.top(); //!!!need to be refernece other the line 40 won't chage the second part
+																									 //change line 40 to s.top().second = true not work, because s will add new item, so we need tmp to be a reference
             if (!tmp.second) {
                 if (!tmp.first->right && !tmp.first->left) {
                     ret.push_back(tmp.first->val);
