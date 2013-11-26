@@ -72,3 +72,47 @@ public:
         }
     }
 };
+
+// Simplify one
+struct Node {
+     int val;
+     int key;
+     Node(int x, int y) : val(x), key(y) {}
+};
+class LRUCache{
+private:
+int size;
+list<Node> q;
+map<int, list<Node>::iterator> hash;
+public:
+    LRUCache(int capacity) {
+        size = capacity;
+    }
+    
+    int get(int key) {
+        if (hash.find(key) == hash.end()) return -1;
+        q.splice(q.begin(), q, hash[key]);
+        hash[key] = q.begin();
+        return (*hash[key]).val;
+    }
+    
+    void set(int key, int value) {
+        if (hash.find(key) != hash.end()) {
+            get(key);
+            (*hash[key]).val = value;
+            return;
+        }
+        Node tmp(value, key);
+        if (q.size() < size) {
+            q.push_front(tmp);
+            hash[key] = q.begin();
+        } else {
+            int _key = (q.back()).key;
+            q.pop_back();
+            hash.erase(_key);
+            q.push_front(tmp);
+            hash[key] = q.begin();
+        }
+    }
+
+};
