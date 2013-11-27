@@ -92,6 +92,9 @@ public:
     void traverse(TreeNode *root, TreeNode *&pre, TreeNode *&p, TreeNode *&q) {
         if (!root) return;
         traverse(root->left, pre, p, q);
+        //if (!pre) {
+        //    pre = root;
+        //} //we can this if block, but we cannot return here. eg, we only have right child, this return will ignore the all right branch.
        if (pre && pre->val > root->val) {
            if (!p) p = pre;
            q = root;  // in case {0,1} conner case, no else here since this will only happen just once.
