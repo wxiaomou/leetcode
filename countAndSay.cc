@@ -4,7 +4,7 @@
 using namespace std;
 class Solution {
 public:
-    string countAndSay(int n) {
+    /*string countAndSay(int n) {
 			if (n == 0) {
 				string ret1 ("");
 				return ret1;
@@ -42,7 +42,31 @@ public:
 			}
 
 			return res;
-		}
+		}*/
+	// better way
+	string countAndSay(int n) {
+        if (!n) return "";
+        if (n == 1) return "1";
+        string ret = "1";
+        while (n > 1) {
+            n--;
+            string res = "";
+            for (int i = 0; i < ret.length();) {
+                char cur = ret[i];
+                int cnt = 0;
+                while (ret[i] == cur) {
+                    cnt ++;
+                    i++;
+                }
+                stringstream ss, cc;//create a stringstream
+                ss << cnt;//add number to the stream
+                res += ss.str();
+                res += cur;
+            }
+            ret = res;
+        }
+        return ret;
+    }
 };
 
 int main(int argc, char** argv) {
