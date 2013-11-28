@@ -13,7 +13,7 @@ public:
 				res.push_back(i + 1);
 				break;
 			}
-			hash.insert(pair<int, int> (numbers[i], i + 1));
+			hash.insert(pair<int, int> (numbers[i], i + 1));// increasing hash size, save space
 		}
 		return res;
 	}
