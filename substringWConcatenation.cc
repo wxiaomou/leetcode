@@ -30,7 +30,6 @@ public:
 				count++;
 				if (count == L.size()) {
 					res.push_back(i);
-					//break;
 				}
 			}
 		}
