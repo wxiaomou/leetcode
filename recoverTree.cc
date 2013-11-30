@@ -97,7 +97,7 @@ public:
         //} //we can this if block, but we cannot return here. eg, we only have right child, this return will ignore the all right branch.
        if (pre && pre->val > root->val) {
            if (!p) p = pre;
-           q = root;  // in case {0,1} conner case, no else here since this will only happen just once.
+           q = root;  // in case {0,1} conner case, no else here since this will only happen just once. If not this conner case, the q will be over write when the order wrong second time.
          }
         pre = root;
         traverse(root->right, pre, p, q);
