@@ -32,7 +32,7 @@ public:
 	}
 };
 
-// binary search way O(log(n))
+// binary search way O(log(n)) key:分类讨论
 class Solution {
 public:
     int search(int A[], int n, int target) {
@@ -62,13 +62,15 @@ public:
             } else {
                 return _search(A, start, mid_ind, target);
             }
-        } else {
+        }  else {
            if (target < mid) {
                return _search(A, start, mid_ind, target);
-           } else if (target > A[end]) {					//cannot have equal, other if eqaul to A[end] it will search the first half.
-              return _search(A, start, mid_ind, target);
+           } else if (target <= A[end]) { 					// same
+              //return _search(A, start, mid_ind, target);
+              return _search(A, mid_ind + 1, end, target);
            } else {
-               return _search(A, mid_ind + 1, end, target);
+               //return _search(A, mid_ind + 1, end, target);
+               return _search(A, start, mid_ind, target);
            }
         }
     }
