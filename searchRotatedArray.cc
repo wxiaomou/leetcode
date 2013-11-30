@@ -32,6 +32,47 @@ public:
 	}
 };
 
+// binary search way O(log(n))
+class Solution {
+public:
+    int search(int A[], int n, int target) {
+        if (!n) return 0;
+        int start = 0;
+        int end = n - 1;
+        return _search(A, start, end, target);
+    }
+    
+    int _search(int A[], int start, int end, const int target) {
+        if (start > end) return -1;
+        if (start == end) {
+            if (A[start] == target)
+                return start;
+            else
+                return -1;
+        }
+        int mid_ind = (start + end) / 2;
+        int mid = A[mid_ind];
+        if (target == mid) return mid_ind;
+        //find it rotated more than half
+        if (mid > A[end]) {
+            if (target <= A[end]) {							//important!!! need to have equal, otherwise wiil search the wrong half.
+                return _search(A, mid_ind + 1, end, target);
+            } else if (target > mid) {
+                return _search(A, mid_ind + 1, end, target);
+            } else {
+                return _search(A, start, mid_ind, target);
+            }
+        } else {
+           if (target < mid) {
+               return _search(A, start, mid_ind, target);
+           } else if (target > A[end]) {					//cannot have equal, other if eqaul to A[end] it will search the first half.
+              return _search(A, start, mid_ind, target);
+           } else {
+               return _search(A, mid_ind + 1, end, target);
+           }
+        }
+    }
+};
 int main(int argc, char **argv) {
 	return 0;
 }
