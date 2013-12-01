@@ -11,7 +11,7 @@ class Solution {
 			if (num.size() < 3)
 				return 0;
 			sort(num.begin(), num.end());
-			int ret = num[num.size() - 1] + num[0] + num[1];
+			int ret = num[num.size() - 1] + num[0] + num[1];//!!!important start value!!!
 			int diff = ret - target;
 			for (int i = 0; i < num.size(); ++i) { 
 				int stable = num[i];
