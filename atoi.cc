@@ -4,7 +4,7 @@
 using namespace std;
 class Solution {
 public:
-	int atoi(const char *str) {
+	/*int atoi(const char *str) {
 		if (!*str)
 			return 0;
 		int res = 0;
@@ -48,7 +48,48 @@ public:
 		if (isMinus)
 			res = -res;
 	return res;
-	}
+	}*/
+
+	 int atoi(const char *str) {
+        if (!(*str)) return 0;
+        while (*str == ' ') str++;
+        if (!str) return 0;
+        bool neg = false;
+        if (*str == '+') {
+            str ++;
+        } else if (*str == '-') {
+            neg = true;
+            str ++;
+        }
+        int ret = 0;
+        //int pre = 0; !!! cannot use ret < pre to judge if non-neg over flow, because ret overflowed may still larger than pre
+        while (str) {
+            if (*str >= '0' && *str <= '9') {
+                 if (neg) {
+                     int tmp = *str - '0';
+                     if ( (INT_MIN + tmp) / 10 + ret <= 0 ) { //!!!cannot be (INT_MIN + tmp) + ret * 10 <= 0 because ret * 10 can overflow, 
+                     										  //and for neg we need qual here because absolute value INT_MIN is larger that INT_MAX, so we can only use special case to convert the special input which is INT_MIN.
+                        ret = ret * 10 + (*str - '0');
+                     } else {
+                         return INT_MIN;
+                     }
+                 } else {
+                     pre = ret;
+                     int tmp = *str - '0';
+                     if ((INT_MAX - tmp) / 10 > ret)
+                        ret = ret * 10 + (*str - '0');
+                     else
+                        return INT_MAX;
+                 }
+            } else {
+                break;
+            }
+            str++;
+        }
+        
+        if (neg) return -ret;
+        return ret;
+    }
 };
 int main() {
 	string a("10522545459");
