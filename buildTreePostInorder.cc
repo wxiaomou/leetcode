@@ -10,8 +10,6 @@
 class Solution {
     public:
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
-        // IMPORTANT: Please reset any member data you declared, as
-        // the same Solution instance will be reused for each test case.
         int i_end = inorder.size() - 1;
         int p_end = postorder.size() - 1;
         if (i_end <= -1 || p_end <= -1) return NULL;
@@ -28,4 +26,26 @@ class Solution {
         root->right = _build(inorder, index + 1, i_end, postorder, p_end - post_right_len, p_end - 1);
         return root;
     }
+
+    /*
+    TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
+        if (!inorder.size()) return NULL;
+        if (inorder.size() != postorder.size()) return NULL;
+        return _build(inorder, 0, inorder.size() - 1, postorder, 0, postorder.size() - 1);
+    }
+    
+    TreeNode *_build(vector<int> &inorder, int start, int end, vector<int> &postorder, int start2, int end2) {
+        if (start > end) return NULL;
+        if (start2 == end2) 
+            return new TreeNode(postorder[start2]);
+        TreeNode *root = new TreeNode(postorder[end2]);
+        int i = 0;
+        while (end - i >= start) {
+            if (postorder[end2] == inorder[end - i])
+                break;
+            i++;
+        }
+        root->left = _build(inorder, start, end - i - 1, postorder, start2, end2 - i - 1);
+        root->right = _build(inorder, end - i + 1, end, postorder, end2 - i, end2 - 1);
+    }*/
 };
