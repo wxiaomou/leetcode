@@ -4,7 +4,7 @@ using namespace std;
 
     class Solution {
     public:
-        string intToRoman(int num) {
+        /*string intToRoman(int num) {
             string ret("");
     		if (!num)
 				return ret;
@@ -57,6 +57,50 @@ using namespace std;
 				int cur = num % base;
 				int pre = num - cur;
 				return intToRoman(pre) + intToRoman(cur);
-			}
+			}*/
+		//iterative way.
+		string intToRoman(int num) {
+        if (!num) return "";
+        int base = 1000;
+        string ret = "";
+        while (base > 0) {
+            int cur = num / base;
+            num -= cur * base;
+            string one, five, ten;
+            
+            switch (base) {
+                case 1:
+                    one = "I";
+                    five = "V";
+                    ten = "X";
+                    break;
+                case 10:
+                    one = "X";
+                    five = "L";
+                    ten = "C";
+                    break;
+                case 100:
+                    one = "C";
+                    five = "D";
+                    ten = "M";
+                    break;
+                case 1000:
+                    one = "M";
+                    break;
+            }
+            
+            if (cur <= 3) {
+                for (int i = 0; i < cur; i++) ret += one;
+            } else if (cur == 4) {
+                ret += one + five;
+            } else if (cur < 9) {
+                ret += five;
+                for (int i = 0; i < cur - 5; i++) ret += one;
+            } else {
+                ret += one + ten;
+            }
+            base /= 10;
+        }
+        return ret;
         }
     };
