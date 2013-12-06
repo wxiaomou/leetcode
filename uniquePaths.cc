@@ -7,7 +7,7 @@ public:
 		if (m== 1 || n == 1)
             return 1;
        int dp[m][n];
-    //	memset(dp, 0, sizeof(int)*m*n);
+    //	memset(dp, 0, sizeof(int)*m*n); not word
 		for (int i = 0; i < m; i++) dp[i][n - 1] = 1;
 		for (int j = 0; j < n; j++) dp[m - 1][j] = 1;
 		for (int i = m - 2; i >= 0; i--) {
@@ -16,8 +16,8 @@ public:
 			}
 		}
 		return dp[0][0];
-
 	}
+
 	int uniquePaths2(int m, int n) {
 		if (m == 1 || n == 1)
 			return 1;
