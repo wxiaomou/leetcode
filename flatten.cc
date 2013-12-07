@@ -20,7 +20,7 @@ class Solution {
         if (!root) return NULL;
         TreeNode *tmp = root->right;
         root->right = _flat(root->left);
-        root->left = NULL;
+        root->left = NULL; //!!!important related to the judge
         TreeNode *ret = root;
         while (root->right) root = root->right;
         root->right = _flat(tmp);
