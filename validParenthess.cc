@@ -4,7 +4,37 @@
 using namespace std;
 class Solution {
 public:
-	bool isValid(string s) {
+	 bool isValid(string s) {
+        int n = s.length();
+        if (!n) return false;
+        stack<char> S;
+        for ( auto i = 0; i < n; ++i ) {
+            if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
+                S.push(s[i]);
+            } else if (!S.empty()) {
+                if (s[i] == ')') {
+                    if (S.top() == '(')
+                        S.pop();
+                    else
+                        return false;
+                } else if (s[i] == ']') {
+                    if (S.top() == '[')
+                        S.pop();
+                    else
+                        return false;
+                } else if (s[i] == '}') {
+                    if (S.top() == '{')
+                        S.pop();
+                    else
+                        return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return S.empty();
+    }
+	/*bool isValid(string s) {
 		if (s.size() == 0|| s.size() % 2)
 			return false;
 		int left1 = 0;
@@ -42,7 +72,7 @@ public:
 			return false;
 
 		return true;
-		}
+		}*/
 };
 
 int main(int argc, char **argv) {
