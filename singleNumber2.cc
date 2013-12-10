@@ -18,4 +18,28 @@ public:
         }
         return ones;
     }
+
+    /*
+     int singleNumber(int A[], int n) {
+        if (!n) return 0;
+        int ones = 0;
+        int twos = 0;
+        int threes = 0;
+        for ( auto i = 0; i < n; ++i ) {
+            twos |= ones & A[i];
+
+            int tmp = ~(ones & A[i]);
+            ones |= A[i];
+            ones &= tmp; 
+            // same as ones ^= A[i];
+            threes = twos & ones;
+            if (threes) {
+                twos &= ~threes;
+                ones &= ~threes;
+            }
+        }
+        return ones;
+    }
+    */
 };
+
