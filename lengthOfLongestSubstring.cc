@@ -33,6 +33,29 @@ public:
 		}
 		return max;
 	}
+
+	/* above is better, nearly O(n)
+	int lengthOfLongestSubstring(string s) {
+        unordered_map<char, int> hash;
+        int ret = 0;
+        int tmp = 0;
+        int start = 0;
+        for ( auto i = 0; i < s.length(); ++i ) {
+            if (hash.count(s[i]) > 0) {
+                ret = max(tmp, ret);
+                start = hash[s[i]] + 1;
+                i = hash[s[i]];
+                hash.clear();
+                tmp = 0;
+            } else {
+                hash[s[i]] = i;
+                tmp++;
+            }
+        }
+        ret =  ret = max(tmp, ret);
+        return ret;
+    }
+	*/
 };
 
 int main(int argc, char **argv) {
