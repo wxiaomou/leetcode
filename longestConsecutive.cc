@@ -24,4 +24,35 @@ public:
         }
         return ret;
     }
+    /*
+     int longestConsecutive(vector<int> &num) {
+        int ret = 0;
+        if (!num.size()) return ret;
+        unordered_set<int> hashset;
+        for ( auto i = 0; i < num.size(); ++i ) {
+            hashset.insert(num[i]);
+        }
+        
+        for ( auto i = 0; i < num.size(); ++i ) {
+            if (hashset.count(num[i]) == 0) continue;
+            int tmp = 1;
+            hashset.erase(num[i]);
+            int j = 1;
+            while (hashset.count(num[i] + j) > 0) {
+                tmp++;
+                hashset.erase(num[i] + j);
+                j++;
+            }
+            
+            j = 1;
+            while (hashset.count(num[i] - j) > 0) {
+                tmp++;
+                hashset.erase(num[i] - j);
+                j++;
+            }
+            ret = max(ret, tmp);
+        }
+        return ret;
+    }
+    */
 };
