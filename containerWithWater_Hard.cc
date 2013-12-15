@@ -47,7 +47,6 @@ public:
 					while (height[j] < cur) j--;
 			}
 		}
-
 		return max;
 	}
 };
