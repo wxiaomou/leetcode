@@ -5,7 +5,45 @@ using namespace std;
 
 class Solution {
 public:
-	 string longestPalindrome(string s) {
+	string longestPalindrome(string s) {
+            int n = s.length();
+            if (!n) return s;
+            string ret;return res1.length() > res2.length() ? res1 : res2;
+            for ( auto i = 0; i < n; ++i ) {
+                string tmp = _length(s, i);
+                ret = ret.length() > tmp.length() ? ret : tmp;
+            }
+            return ret;
+        }
+
+        string _length(string &s, int index) {
+             int i = 0;
+             // odd
+             while (index - i >= 0 && index + i < s.length()) {
+                 if (s[index - i] != s[index + i])
+                    break;
+                 i++;
+             }
+             
+             //if ( !(index - i >= 0 && index + i < s.length()) ) i--;
+             i--;
+             string res1 = s.substr(index - i, 2 * i + 1);
+             
+             i = 0;
+             while (index - i >= 0 && index + i + 1 < s.length()) {
+                 if (s[index - i] != s[index + i + 1])
+                    break;
+                 i++;
+             }
+             
+             //if ( !(index - i >= 0 && index + i + 1 < s.length()) ) i--;
+             i--;
+             string res2 = s.substr(index - i, (i + 1) * 2);
+             
+             
+             
+        }
+	 /*string longestPalindrome(string s) {
     	if(s.length() <= 1)
 			return s;
 		int len = 0;
@@ -44,8 +82,9 @@ public:
 	//	i--;
 		string res2 = s.substr(index - i + 1, 2 * i);
 		//cout << res2 << endl;
-
 		
+		return res1.length() > res2.length() ? res1 : res2;
+	}	*/
 };
 
 int main(int argc, char **argv) {
