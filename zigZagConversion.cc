@@ -24,7 +24,7 @@ public:
 	}
 	/*
 	string convert(string s, int nRows) {
-        if (nRows < 2) return s;
+        if (nRows < 2) return s; //!!! need to handle the special case here, O.W. j += nRows + nRows -  2 will not increase j
         int n = s.length();
         string ret = "";
         for ( auto i = 0; i < nRows; ++i ) {
