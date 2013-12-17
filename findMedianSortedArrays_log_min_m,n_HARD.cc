@@ -3,7 +3,64 @@
 #include <algorithm>
 
 using namespace std;
+//log(m + n) solution refer to http://www2.myoops.org/course_material/mit/NR/rdonlyres/Electrical-Engineering-and-Computer-Science/6-046JFall-2005/30C68118-E436-4FE3-8C79-6BAFBB07D935/0/ps9sol.pdf
 class Solution {
+public:
+    double findMedianSortedArrays(int A[], int m, int B[], int n) {
+        if ((m + n) % 2) {
+            if (!m)
+                return B[n / 2];
+            else if (!n)
+                return A[m / 2];
+                
+            return med(A, m, B, n, (m + n) / 2 + 1, 1, m);
+        } else {
+            if (!m)
+                return (B[n / 2 - 1] + B[n / 2]) / 2.0;
+            else if (!n)
+                return (A[m / 2 - 1] + A[m / 2]) / 2.0;
+                
+            return (med(A, m, B, n, (m + n) / 2, 1, m) + med(A, m, B, n, (m + n) / 2 + 1, 1, m)) / 2.0;
+        }
+    }
+    
+    int med(int A[], int m, int B[], int n, int k, int left, int right) {
+        //!!!k, left, right here are not the index, the start from 1.
+        if (left > right)
+            return med(B, n, A, m, k, 1, n); // median not in A
+            
+        int i = (left + right) / 2 - 1; 
+        int mid = i + 1; // there are mid - 1 elements less than A[i]
+        int j = k - mid; // j elements in B which should less than A[i]
+        
+        //special case
+        if (j > n) { 
+            return med(A, m, B, n, k, mid + 1, right); //A[i] < median, B is not enough need to get more elements in A
+        } else if (j < 0) {
+            return med(A, m, B, n, k, left, mid - 1); // A[i] > median
+        }
+        
+        //special case
+        if ((j == 0 && A[i] <= B[j]) || (j == n && A[i] >= B[j - 1])) {
+            return A[i];
+        } else if (j == 0 && A[i] > B[j]) { // A[i] > median
+            return med(A, m, B, n, k, left, mid - 1);
+        } else if ((j == n && A[i] < B[j - 1])) {
+            return med(A, m, B, n, k, mid + 1, right);
+        }
+        
+        if (j > 0 && j < n) {
+            if (A[i] >= B[j - 1] && A[i] <= B[j]) // in B excact j elements less than A[i], so A[i] is the roght one.
+                return A[i];
+            else if (A[i] < B[j - 1]) { // A[i] < median
+                return med(A, m, B, n, k, mid + 1, right);
+            } else {
+                return med(A, m, B, n, k, left, mid - 1);
+            }
+        }
+    }
+};
+/*class Solution {
     public:
             double findMedianSortedArrays(int A[], int m, int B[], int n) {
                 if (!m) {
@@ -91,10 +148,8 @@ class Solution {
                     }
                 }
 
-            }
-            
-           
-};
+            }        
+};*/
 
 int main(int argc, char **argv) {
     return 0;
