@@ -26,7 +26,7 @@ public:
                     left_cur = cur;
                 } else {
                     left_cur->next = cur;
-                    if (cur->val < left_cur->val) _left = true;
+                    if (cur->val < left_cur->val) _left = true; //4->1->2->3->5->6->7 we don't want resort 1->2->3 and 4->5->6 so that I add these two flag of _left and _right.
                     left_cur = left_cur->next;
                 }
             } else {
@@ -41,10 +41,9 @@ public:
             }
             cur = cur->next;
         }
-
-        
+     
         if (left_cur)
-            left_cur->next = NULL;
+            left_cur->next = NULL; //!!!no matter we recurse it or not, the sublist should end with NULL.
         if (right_cur)
             right_cur->next = NULL;
             
