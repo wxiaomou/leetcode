@@ -4,7 +4,46 @@
 using namespace std;
 class Solution {
 public:
-	int romanToInt(string s) {
+	//better solution
+	 int romanToInt(string s) {
+        int n = s.length();
+        if (!n) return 0;
+        int i = 0;
+        int ret = 0;
+        while (i < n) {
+            if (s[i] == 'M') {
+                ret += 1000;
+            } else if (s[i] == 'D') {
+                ret += 500;
+            } else if (s[i] == 'C') {
+                ret += 100;
+            } else if (s[i] == 'L') {
+                ret += 50;
+            } else if (s[i] == 'X') {
+                ret += 10;
+            } else if (s[i] == 'V') {
+                ret += 5;
+            } else if (s[i] == 'I') {
+                ret += 1;
+            }
+            i++;
+        }
+        i--;
+        while (i >= 0) {
+            if (i > 0) {
+               if ((s[i] == 'X' || s[i] == 'V') && s[i - 1] == 'I') {
+                    ret -= 2;
+                } else if ((s[i] == 'L' || s[i] == 'C') && s[i - 1] == 'X') {
+                    ret -= 20;
+                } else if ((s[i] == 'D' || s[i] == 'M') && s[i - 1] == 'C') {
+                    ret -= 200;
+                }
+            }
+            i--;
+        }
+        return ret;
+    }
+	/*int romanToInt(string s) {
 		if (s.length() == 0)
 			return 0;
 		if (s[0] == 'M') {
@@ -40,7 +79,7 @@ public:
 			else
 				return -1 + romanToInt(s.substr(1));
 		}
-	}
+	}*/
 };
 
 int main (int argc, char **argv) {
