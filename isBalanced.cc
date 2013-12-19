@@ -9,7 +9,25 @@
  */
 class Solution {
     public:
-    bool isBalanced(TreeNode *root) {
+        bool isBalanced(TreeNode *root) {
+        if (!root) return true;
+        int h;
+        return _isBal(root, h);
+    }
+    
+    bool _isBal(TreeNode *root, int &h) {
+        if (!root) {
+            h = 0;
+            return true;
+        }
+        int h1, h2;
+        bool l = _isBal(root->left, h1);
+        bool r = _isBal(root->right, h2);
+        h = max(h1, h2) + 1;
+        if (l && r && (abs(h1 - h2) <= 1)) return true;
+        else return false;
+    }
+    /*bool isBalanced(TreeNode *root) {
         if (!root) return true;
         int left = depth(root->left);
         int right = depth(root->right);
@@ -21,5 +39,5 @@ class Solution {
         int left = depth(root->left);
         int right = depth(root->right);
         return left > right ? left + 1 : right + 1;
-    }
+    }*/
 };
