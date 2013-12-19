@@ -6,7 +6,37 @@ using namespace std;
 
 class Solution {
 	public:
-		vector<vector<int> > threeSum(vector<int> &num) { // Attention when vec def >> should be > > !!!!!!!!!!!!111
+		vector<vector<int> > threeSum(vector<int> &num) {
+        sort(num.begin(), num.end());
+        int n = num.size();
+        if (n < 3) return vector<vector<int>>();
+        vector<vector<int>> ret;
+        for (int i = 0; i + 2 < n;) {
+            int first = num[i];
+            int j = i + 1;
+            int k = n - 1;
+            while (j < k) {
+                if (first + num[j] + num[k] == 0) {
+                    vector<int> tmp;
+                    int second = num[j];
+                    int third = num[k];
+                    tmp.push_back(first);
+                    tmp.push_back(second);
+                    tmp.push_back(third);
+                    ret.push_back(tmp);
+                    while (num[j] == second) j++;
+                    while (num[k] == third) k--;
+                } else if (first + num[j] + num[k] > 0) {
+                    k--;
+                } else {
+                    j++;
+                }
+            }
+            while (i + 2 < n && num[i] == first) i++;
+        }
+        return ret;
+    }
+		/*vector<vector<int> > threeSum(vector<int> &num) { 
 			vector<vector<int> > ret;
 			if (num.size() == 0)
 				return ret;
@@ -35,7 +65,7 @@ class Solution {
 				}
 			}
 			return ret;
-		}
+		}*/
 };
 
 
