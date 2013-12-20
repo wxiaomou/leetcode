@@ -6,7 +6,7 @@ using namespace std;
 //log(m + n) solution refer to http://www2.myoops.org/course_material/mit/NR/rdonlyres/Electrical-Engineering-and-Computer-Science/6-046JFall-2005/30C68118-E436-4FE3-8C79-6BAFBB07D935/0/ps9sol.pdf
 class Solution {
 public:
-    double findMedianSortedArrays(int A[], int m, int B[], int n) {
+    double findMedianSortedArrays(int A[], int m, int B[], int n) {fi
         if ((m + n) % 2) {
             if (!m)
                 return B[n / 2];
@@ -60,6 +60,49 @@ public:
         }
     }
 };
+/* second time did 
+double findMedianSortedArrays(int A[], int m, int B[], int n) {
+        if ( (m + n) % 2 ) {
+            if (!m)
+                return B[n / 2];
+            else if (!n) 
+                return A[m / 2];
+            return find(A, m, B, n, 1, m, (m + n) / 2 + 1);
+        } else {
+               if (!m)
+                return (B[n / 2 - 1] + B[n / 2]) / 2.0;
+            else if (!n) 
+                return (A[m / 2 - 1] + A[m / 2]) / 2.0;
+            return (find(A, m, B, n, 1, m, (m + n) / 2) + find(A, m, B, n, 1, m, (m + n) / 2 + 1)) / 2.0;
+        }
+    }
+    
+    double find(int A[], int m, int B[], int n, int left, int right, int k) {
+        if (left > right)
+            return find(B, n, A, m, 1, n, k);
+        
+        int mid = (left + right) / 2;
+        int i = mid - 1;
+        int j = k - mid;
+        
+        if (j < 0) return find(A, m, B, n, left, mid - 1, k);
+        if (j > n) return find(A, m, B, n, mid + 1, right, k);
+        
+        if ((j == 0 && B[j] >= A[i]) || (j == n && B[n - 1] <= A[i])) return A[i];
+        
+        if (j == 0) return find(A, m, B, n, left, mid - 1, k);
+        if (j == n) return find(A, m, B, n, mid + 1, right, k);
+        
+        if (A[i] >= B[j - 1] && A[i] <= B[j]) {
+            return A[i];
+        } else if (A[i] < B[j - 1]) {
+            return find(A, m, B, n, mid + 1, right, k);
+        } else {
+            return find(A, m, B, n, left, mid - 1, k);
+        }
+    }
+*/
+    
 /*class Solution {
     public:
             double findMedianSortedArrays(int A[], int m, int B[], int n) {
