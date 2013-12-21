@@ -6,7 +6,7 @@ using namespace std;
 
 class Solution {
 	public:
-		vector<vector<int> > fourSum(vector<int> &num, int target) { // Attention when vec def >> should be > > !!!!!!!!!!!!111
+		vector<vector<int> > fourSum(vector<int> &num, int target) { 
 			vector<vector<int> > ret;
 			if (num.size() < 4)
 				return ret;
@@ -40,6 +40,45 @@ class Solution {
 			}
 			return ret;
 		}
+		/*
+		vector<vector<int> > fourSum(vector<int> &num, int target) {
+        int n = num.size();
+        if (n < 4) return vector<vector<int>>();
+        sort(num.begin(), num.end());
+        vector<vector<int>> ret;
+        int i = 0;
+        while (i < n - 3) {
+            int first = num[i];
+            int j = i + 1;
+            while (j < n - 2) {
+                int sec = num[j];
+                int k = j + 1;
+                int l = n - 1;
+                while (k < l) {
+                    int third = num[k];
+                    int four = num[l];
+                    if (first + sec + third + four == target) {
+                        vector<int> tmp;
+                        tmp.push_back(first);
+                        tmp.push_back(sec);
+                        tmp.push_back(third);
+                        tmp.push_back(four);
+                        ret.push_back(tmp);
+                        while (k < n && num[k] == third) k++;
+                        while (l >= 0 && num[l] == four) l--;
+                    } else if (first + sec + third + four > target) {
+                        while (k < n && num[l] == four) l--;
+                    } else {
+                        while (l >= 0 && num[k] == third) k++;
+                    }
+                }
+                while (j < n - 2 && num[j] == sec) j++;
+            }
+            while (i < n - 3 && num[i] == first) i++;
+        }
+        return ret;
+    }
+		*/
 };
 
 
