@@ -5,7 +5,36 @@ using namespace std;
 
 class Solution {
 public: 
-	vector<string> letterCombinations(string digits) {
+	 unordered_map<int, string> hash;
+    vector<string> letterCombinations(string digits) {
+        int n = digits.size();
+        hash[2] = "abc";
+        hash[3] = "def";
+        hash[4] = "ghi";
+        hash[5] = "jkl";
+        hash[6] = "mno";
+        hash[7] = "pqrs";
+        hash[8] = "tuv";
+        hash[9] = "wxyz";
+        return _letterCom(digits, 0);
+    }
+    
+    vector<string> _letterCom(string &digits, int  index) {
+        if (index == digits.length())
+            return vector<string>(1, "");
+        vector<string> ret;
+        vector<string> tmp = _letterCom(digits, index + 1);
+        string iter = hash[digits[index] - '0'];
+        for ( auto i = 0; i < iter.length(); ++i ) {
+            vector<string> tmp1 = tmp;
+            for ( auto j = 0; j < tmp1.size(); ++j ) {
+                tmp1[j] = iter[i] + tmp1[j];
+            }
+            ret.insert(ret.end(), tmp1.begin(), tmp1.end());
+        }
+        return ret;
+    }
+	/*vector<string> letterCombinations(string digits) {
 		vector<string> ret;
 		if (!digits.length()){
 			ret.push_back("");
@@ -167,7 +196,7 @@ public:
 		}
 
 		return ret;
-	}
+	}*/
 };
 
 int main(int argc, char **argv) {
