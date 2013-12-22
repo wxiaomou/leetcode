@@ -20,7 +20,7 @@ class Solution {
         return 0;
     }
     
-    int _find(string &S, string &T, int j, int i, int **&m) {
+    int _find(string &S, string &T, int j, int i, int **&m) { // shoulb be reference here O.W. memory will overflow
         if (i == T.length()) {
             //m[i][j] = 1;
             return 1;//m[i][j];
