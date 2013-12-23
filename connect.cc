@@ -11,11 +11,11 @@ class Solution {
     void connect(TreeLinkNode *root) {
         if (!root) return;
         if (root->left)
-        root->left->next = root->right;
+            root->left->next = root->right;
         else
-        return;
+            return;
         root->right->next = root->next ? root->next->left : NULL;
-        connect(root->left);
         connect(root->right);
+        connect(root->left);
     }
 };
