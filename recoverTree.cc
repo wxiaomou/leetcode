@@ -64,7 +64,7 @@ public:
 			return;
 		}
 };
-/* O(1) Solution
+/* O(1) space Solution
 
 class Solution {
 public:
@@ -100,7 +100,8 @@ public:
            q = root;  // in case {0,1} conner case, no else here since this will only happen just once. If not this conner case, the q will be over write when the order wrong second time.
          }
         pre = root;
-        traverse(root->right, pre, p, q);
+        traverse(root->right, pre, p, q); // this will hit the leftest chile of the right sub of root which is the nex node in inorder traverse, 
+                                          // then we can compare pre and that child which will be root at that time.
     }
     
 };
