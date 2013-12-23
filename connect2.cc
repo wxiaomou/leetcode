@@ -8,6 +8,34 @@
  */
 class Solution {
     public:
+     void connect(TreeLinkNode *root) {
+        if (!root) return;
+        TreeLinkNode *p = NULL;
+        TreeLinkNode *cur = root->next;
+        while (cur) {
+            if (cur->left) {
+                p = cur->left;
+                break;
+            } else if (cur->right) {
+                p = cur->right;
+                break;
+            }
+            cur = cur->next;
+        }
+        if (root->left) {
+            if (root->right)
+                root->left->next = root->right;
+            else {
+                root->left->next = p;
+            }
+        }
+        if (root->right) {
+            root->right->next = p;
+        }
+        connect (root->right); //right first
+        connect (root->left);
+    }
+    /*    
     void connect(TreeLinkNode *root) {
         if (!root) return;
         TreeLinkNode *p = NULL;
@@ -37,6 +65,6 @@ class Solution {
         //right first
         connect(root->right);
         connect(root->left);
-        
     }
+    */
 };
