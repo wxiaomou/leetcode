@@ -6,6 +6,32 @@ using namespace std;
 class Solution {
 public: 
 	vector<string> generateParenthesis(int n) {
+        if (!n) vector<string>();
+        return _gen(n, n);
+    }
+    
+    vector<string> _gen(int left, int right) {
+        if (!right) return vector<string>(1, "");
+        vector<string> ret;
+        if (left > 0) {
+            vector<string> tmp = _gen(left - 1, right);
+            for (int i = 0; i < tmp.size(); ++i) {
+                tmp[i] = "(" + tmp[i];
+            }
+            ret.insert(ret.end(), tmp.begin(), tmp.end());
+        }
+        
+        if (left < right) {
+            vector<string> tmp1 = _gen(left, right - 1);
+            for (int i = 0; i < tmp1.size(); ++i) {
+                tmp1[i] = ")" + tmp1[i];
+            }
+            ret.insert(ret.end(), tmp1.begin(), tmp1.end());
+        }
+        return ret;
+    }
+    /*
+	vector<string> generateParenthesis(int n) {
 		vector<string> ret;
 		if (n <= 0)
 			return ret;
@@ -41,7 +67,7 @@ public:
 		
 		return ret;
 		}
-	
+		*/
 };
 
 int main(int argc, char** argv) {
