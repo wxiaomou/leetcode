@@ -41,6 +41,31 @@ public:
 
 			return head;
     }
+
+    /* no copy way
+    ListNode *removeNthFromEnd(ListNode *head, int n) {
+        if (!head) return head;
+        ListNode *dummy = new ListNode(0);
+        dummy->next = head;
+        ListNode *first = dummy;
+        ListNode *sec = dummy->next;
+        if (n > 1) {
+            for ( auto i = 0; i < n; ++i ) sec = sec->next;
+            while (sec) {
+                sec = sec->next;
+                first = first->next;
+            }
+            first->next = first->next->next;
+        } else if (n == 1) {
+            while (sec->next) {
+                sec = sec->next;
+                first = first->next;
+            }
+            first->next = NULL;
+        }
+        return dummy->next;
+    }
+    */
 };
 
 int main(int argc, char **argv) {
