@@ -12,6 +12,31 @@ struct ListNode {
 };
 class Solution {
 public:
+	//iterative way
+	ListNode *swapPairs(ListNode *head) {
+        if (!head || !head->next) return head;
+        ListNode *ret = NULL;
+        ListNode *cur = head;
+        ListNode *cur1 = NULL;
+        ListNode *post = head->next;
+        
+        while (cur && post) {
+            ListNode *tmp = post->next;
+            post->next = cur;
+            cur->next = tmp;
+            if (cur1)
+                cur1->next = post;
+            cur1 = cur;
+            if (!ret) {
+                ret = post;
+            } 
+            cur = cur->next;
+            if (cur)
+                post = cur->next;
+        }
+        return ret;
+    }
+    //recursive way
     ListNode *swapPairs(ListNode *head) {
 			if (!head || !head->next)
 				return head;
