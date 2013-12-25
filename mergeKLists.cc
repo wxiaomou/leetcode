@@ -13,8 +13,46 @@ struct ListNode {
     ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
 };
+struct OrderByVal
+    {
+        bool operator() (ListNode * &a, ListNode * &b) {return a->val > b->val; }
+    };
+class Solution {
+public:
+   
+    ListNode *mergeKLists(vector<ListNode *> &lists) {
+        int n = lists.size();
+        if (!n) return NULL;
+        ListNode *head = NULL;
+        ListNode *cur = head;
+        priority_queue< const ListNode *, vector<ListNode *>, OrderByVal> heap;
+        for (int i = 0; i < n; i++) { 
+            if (lists[i])
+                heap.push(lists[i]);
+        }
 
-struct PariComparator {
+        while (heap.size()) {
+            ListNode *tmp = heap.top();
+            heap.pop();
+            if (!tmp) continue;
+            if (!head) {
+                head = tmp;
+                cur = head;
+            } else {
+                cur->next = tmp;
+                cur = cur->next;
+            }
+            tmp = tmp->next;
+            cur->next = NULL;
+            if (tmp)
+                heap.push(tmp);
+                
+        }
+        if (cur)
+            cur->next = NULL;
+        return head;
+    }
+/*struct PariComparator {
 	bool operator() (const pair<int, int> &p1, const pair<int, int>&p2) {
 		return p1.first > p2.first;
 	}
@@ -56,7 +94,7 @@ public:
 
 			}
 			return head;
-    }
+    }*/
 };
 int main(int argc, char **argv) {
 	return 0;
