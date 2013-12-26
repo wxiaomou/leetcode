@@ -45,6 +45,35 @@ public:
 			return pre;
     }
 
+    /*
+	 ListNode *reverseKGroup(ListNode *head, int k) {
+        if (!k || k == 1 || !head) return head;
+        ListNode *pre = head;
+        ListNode *cur = head->next;
+        int i = 0;
+        while (i < k && pre) {
+           pre = pre->next;
+           i++;
+       }
+       if (i < k) return head;
+       i = 0;
+       pre = head;
+       ListNode *tail = pre;
+       ListNode *post = NULL;
+       while (i < k - 1) {
+          post = cur->next;
+          cur->next = pre;
+          pre = cur;
+          cur = post;
+          i++;
+       }
+       tail->next = post;
+       tail->next = reverseKGroup(post, k);
+       
+       return pre;
+    }
+    */
+
 };
 
 int main (int argc, char **argv) {
