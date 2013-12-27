@@ -7,6 +7,34 @@ class Solution {
 public:
 	class Solution {
 public:
+  char *strStr(char *haystack, char *needle) {
+        int m = strlen(haystack);
+        int n = strlen(needle);
+        if (!n) return haystack;
+        if (!m) return NULL;
+        if (m < n) return NULL;
+        int i = 0;
+        
+        while (i < m - n + 1) {
+            char *cur = haystack + i;
+            char *tmp = needle;
+            if (*cur == *tmp) { 
+                while (*tmp != 0) { // !!! use this, not !tmp to check if needle hit the last one.
+                    if (*cur != *tmp) break;
+                    cur ++;
+                    tmp ++;
+                }
+                if (*tmp == 0) return haystack + i;
+            }
+            i++;
+        }
+        return NULL;
+    }
+
+//----------------------------------------------------//
+
+
+
 char *strStr(char *haysstack, char *needle) {
         int m = strlen(haysstack);
 		int n = strlen(needle);
