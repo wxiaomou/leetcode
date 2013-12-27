@@ -11,7 +11,7 @@ public:
 			return 0;
 		int a = 1;
 		int b = 2;
-		for (int i = 3; i <= n; ++i) {
+		for (int i = 3; i <= n; ++i) { //!!!attention
 			int tmp = a + b;
 			a = b;
 			b = tmp;
