@@ -16,6 +16,6 @@ public:
 			a = b;
 			b = tmp;
 		}
-		return b;
+		return b; // should return b
 	}
 };
