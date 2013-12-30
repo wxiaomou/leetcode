@@ -5,7 +5,26 @@ using namespace std;
 
 class Solution {
 public:
-	vector<int> plusOne(vector<int> &digits) {
+	 vector<int> plusOne(vector<int> &digits) {
+        int n = digits.size();
+        if (!n) return digits;
+        int adv = 1;
+        for (int i = n - 1; i >= 0; --i) {
+            int tmp = digits[i] + adv;
+            if (tmp >= 10) {
+                adv = 1;
+            } else {
+                adv = 0;
+            }
+            digits[i] = tmp % 10;
+        }
+        if (adv) {
+            digits.insert(digits.begin(), 1);
+        }
+        return digits;
+    }
+
+	/*vector<int> plusOne(vector<int> &digits) {
 		if (!digits.size())
 			return digits;
 
@@ -25,7 +44,7 @@ public:
 			digits.insert(digits.begin(), 1);
 		}
 		return digits;
-	}
+	}*/
 };
 
 int main (int argc, char **argv) {
