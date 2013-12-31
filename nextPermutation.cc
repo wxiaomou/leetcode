@@ -21,7 +21,32 @@ public:
 			num[k] = tmp;
 		}
 		sort(num.begin() + pos + 1, num.end());
-        
+	}
+
+	//--------------------------------------------//
+	 void nextPermutation(vector<int> &num) {
+        int n = num.size();
+        if (n <= 1) return;
+        int i = n - 1;
+        while (i > 0) {
+            if (num[i] <= num[i - 1]) {
+                i--;
+            } else {
+                int ind = i;
+                for (int j = i; j < n; ++j) {
+                    if (num[j] > num[i - 1])
+                        ind = j;
+                }
+                int tmp = num[i - 1];
+                num[i - 1] = num[ind];
+                num[ind] = tmp;
+                sort(num.begin() + i, num.end());
+                return;
+            }
+        }
+        sort(num.begin(), num.end());
+        return;
+    }
 };
 
 int main (int argc, char **argv) {
