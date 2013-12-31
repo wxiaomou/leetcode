@@ -30,6 +30,7 @@ public:
         }
         return ret;
     }
+
     /*
 	vector<string> generateParenthesis(int n) {
 		vector<string> ret;
@@ -67,7 +68,7 @@ public:
 		
 		return ret;
 		}
-		*/
+	*/
 };
 
 int main(int argc, char** argv) {
