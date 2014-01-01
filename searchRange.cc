@@ -4,6 +4,34 @@
 using namespace std;
 class Solution {
 public:
+	vector<int> searchRange(int A[], int n, int target) {
+        if (!n) return vector<int>(2, -1);
+        if (!(target >= A[0] && target <= A[n - 1])) return vector<int>(2, -1);
+        
+        int ind = search(A, 0, n - 1, target);
+        if (ind < 0) return vector<int>(2, -1);
+        int i = ind, j = ind;
+        while (i >= 0 && A[i] == target) i--;
+        while (j < n && A[j] == target) j++;
+        i++;
+        j--;
+        vector<int> ret;
+        ret.push_back(i);
+        ret.push_back(j);
+        return ret;
+    }
+    
+    int search(int A[], int begin, int end, int target) {
+        if (begin > end) return -1;
+        int mid = (begin + end) / 2;
+        if (A[mid] == target) return mid;
+        if (A[mid] > target) 
+            return search(A, begin, mid - 1, target);
+        else 
+            return search(A, mid + 1, end, target);
+    }
+
+	//-----------------------------------------------------//
 	  vector<int> searchRange(int A[], int n, int target) {
     	vector<int> res;
 		if (target < A[0] || target > A[n - 1]) {
