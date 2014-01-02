@@ -4,6 +4,42 @@
 using namespace std;
 class Solution {
 public:
+  vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
+        int n = candidates.size();
+        if (!n) return vector<vector<int>>();
+        sort(candidates.begin(), candidates.end());
+        return comb(candidates, target, 0);
+    }
+
+    vector<vector<int>> comb(vector<int> &candidates, int target, int begin) {
+        int n = candidates.size();
+        vector<vector<int>> ret;
+        
+        for (int i = begin; i < n; i++) {
+        	if (i > 0 && candidates[i] == candidates[i - 1]) continue;
+            if (candidates[i] == target) {
+                ret.push_back(vector<int>(1, target));
+                return ret;
+            }
+            int ref = target;
+            
+            if (candidates[i] < ref) {
+                vector<vector<int>> tmp = comb(candidates, ref - candidates[i], i);
+                
+                if (!tmp.size()) continue;
+                
+                for (int j = 0; j < tmp.size(); j++) {
+                    tmp[j].insert(tmp[j].begin(), candidates[i]);
+                }
+                ret.insert(ret.end(), tmp.begin(), tmp.end());
+                ref -= candidates[i];
+            }
+            if (candidates[i] > target) break;
+        }
+        return ret;
+    }
+
+	//------------------------------------------------------------------------//
     vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
     		vector<vector<int> > ret;
 				int size = candidates.size();
