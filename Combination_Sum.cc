@@ -16,15 +16,12 @@ public:
         vector<vector<int>> ret;
         
         for (int i = begin; i < n; i++) {
-        	if (i > 0 && candidates[i] == candidates[i - 1]) continue;
             if (candidates[i] == target) {
                 ret.push_back(vector<int>(1, target));
                 return ret;
             }
-            int ref = target;
-            
-            if (candidates[i] < ref) {
-                vector<vector<int>> tmp = comb(candidates, ref - candidates[i], i);
+            if (candidates[i] < target) {
+                vector<vector<int>> tmp = comb(candidates, target - candidates[i], i);
                 
                 if (!tmp.size()) continue;
                 
@@ -32,13 +29,11 @@ public:
                     tmp[j].insert(tmp[j].begin(), candidates[i]);
                 }
                 ret.insert(ret.end(), tmp.begin(), tmp.end());
-                ref -= candidates[i];
             }
             if (candidates[i] > target) break;
         }
         return ret;
     }
-
 	//------------------------------------------------------------------------//
     vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
     		vector<vector<int> > ret;
