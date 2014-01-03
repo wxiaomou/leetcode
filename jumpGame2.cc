@@ -4,7 +4,26 @@ using namespace std;
 
 class Solution {
 public:
-    int jump(int A[], int n) {
+	int jump(int A[], int n) {
+        if (!n || n == 1) return 0;
+        int ret = 0;
+        int i = 0;
+        int dist = 0;
+        while (i < n) {
+            dist = A[i] + i;
+            if (dist >= n - 1) return ret + 1;
+            int ref = 0;
+            for (int j = i + 1; j <= i + A[i]; ++j) {
+                if (A[j] + j > dist) {
+                    dist = A[j] + j;
+                    ref = j;
+                }
+            }
+            i = ref;
+            ret++;
+        }
+    }
+    /*int jump(int A[], int n) {
             int m[n];
             if (n < 2)
                 return 0;
@@ -29,7 +48,7 @@ public:
 		for (int i = 0; i < n; ++i)
 			cout << m[i] << " ";
 		return m[0];
-    }
+    }*/
 };
 
 int main(int argc, char **argv) {
