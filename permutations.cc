@@ -5,6 +5,30 @@ using namespace std;
 class Solution {
 public:
 	vector<vector<int> > permute(vector<int> &num) {
+        int n = num.size();
+        if (!n) return vector<vector<int>>();
+        vector<bool> ref(n, false);
+        return _permute(num, ref);
+    }
+    vector<vector<int> > _permute(vector<int> &num, vector<bool> &ref) {
+        vector<vector<int>> ret;
+        vector<vector<int>> tmp;
+        for ( auto i = 0; i < num.size(); ++i ) {
+            if (!ref[i]) {
+                ref[i] = true;
+                tmp = _permute(num, ref);
+                for ( auto j = 0; j < tmp.size(); ++j) {
+                    tmp[j].insert(tmp[j].begin(), num[i]);
+                }
+                ret.insert(ret.end(), tmp.begin(), tmp.end());
+                ref[i] = false;
+            }
+        }
+        if (!tmp.size()) ret.push_back(vector<int>());
+        return ret;
+    }
+    //--------------------------------------------//
+	vector<vector<int> > permute(vector<int> &num) {
 		vector<vector<int> > res;
 		if (!num.size())
 			return res;
