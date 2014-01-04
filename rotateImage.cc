@@ -5,6 +5,30 @@ using namespace std;
 
 class Solution {
 public:
+	void rotate(vector<vector<int> > &matrix) {
+        int n = matrix.size();
+        for (int i = 0; i < n / 2; ++i ) {
+            vector<int> tmp;
+            for (int j = i; j < n - i - 1; ++j) {
+                tmp.push_back(matrix[i][j]);
+            }
+            for (int j = i; j < n - i - 1; ++j) {
+                matrix[i][j] = matrix[n - j - 1][i];
+            }
+            for (int j = i; j < n - i - 1; ++j) {
+                matrix[n - j - 1][i] = matrix[n - i - 1][n - j -1];
+            }
+            
+            for (int j = i; j < n - i - 1; ++j) {
+               matrix[n - i - 1][n - j -1] = matrix[j][n - i -1];
+            }
+            for (int j = i; j < n - i - 1; ++j) {
+                matrix[j][n - i -1] = tmp[j - i];
+            }
+        }
+    }
+
+	//----------------------------------------------//
 	  void rotate(vector<vector<int> > &matrix) {
     	if (matrix.size() == 0)
 			return;
