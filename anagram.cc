@@ -6,6 +6,28 @@
 using namespace std;
 class Solution {
 public:
+	 vector<string> anagrams(vector<string> &strs) {
+        int n = strs.size();
+        vector<string> _strs = strs;
+        if (!n) return vector<string>();
+        bool first = true;
+        for (auto i = 0; i < n; ++i) sort(_strs[i].begin(), _strs[i].end());
+        unordered_map<string, int> hash;
+        vector<string> ret;
+        for (auto i = 0; i < n; ++i) {
+            if (hash.count(_strs[i]) > 0) {
+                if (first) {
+                    ret.push_back( strs[hash[_strs[i]]] );
+                    first = false;
+                }
+                ret.push_back(strs[i]);
+            } else {
+                hash[_strs[i]] = i;
+            }
+        }
+        return ret;
+    }
+	//------------------------------------------//
     vector<string> anagrams(vector<string> &strs) {
          map<string, pair<string, bool> >  hash;
     		vector<string> res;
