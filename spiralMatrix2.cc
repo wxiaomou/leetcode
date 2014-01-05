@@ -5,6 +5,28 @@ using namespace std;
 class Solition {
 public:
 	vector<vector<int> > generateMatrix(int n) {
+        vector<int> tmp(n, 0);
+        vector<vector<int>> ret(n, tmp);
+        int num = 1;
+        int row_s = 0, row_e = n - 1, col_s = 0, col_e = n - 1;
+        while (row_s <= row_e) {
+            if (row_s == row_e) {
+                ret[row_s][col_s] = num;
+            } else {
+                for (int j = col_s; j <= col_e; j++) ret[row_s][j] = num++;
+                for (int i = row_s + 1; i <= row_e; i++) ret[i][col_e] = num++;
+                for (int j = col_e - 1; j >= col_s; j--) ret[row_e][j] = num++;
+                for (int i = row_e - 1; i > row_s; i--) ret[i][col_s] = num++;
+            }
+            row_s++;
+            row_e--;
+            col_s++;
+            col_e--;
+        }
+        return ret;
+    }
+	//---------------------recursion-----------------//
+	vector<vector<int> > generateMatrix(int n) {
 		vector<int> tmp(n, 0);
 		vector<vector<int> > res(n, tmp);
 		fill(res, n, 0, 1);
