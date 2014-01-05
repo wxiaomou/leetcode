@@ -5,6 +5,22 @@ using namespace std;
 
 class Solution {
 public:
+
+	int maxSubArray(int A[], int n) {
+        if (!n) return 0;
+        int ret = INT_MIN;
+        int cur = 0;
+        for (int i = 0; i < n; ++i) {
+            if (cur < 0) {
+                cur = A[i];
+            } else {
+                cur += A[i];
+            }
+            ret = max(ret, cur);
+        }
+        return ret;
+    }
+	//-----------------------//
 	int maxSubArray2(int A[], int n) {
 		if (0 == n) return 0;
 		int cur_sum = 0;
