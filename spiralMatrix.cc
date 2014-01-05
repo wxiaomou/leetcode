@@ -5,6 +5,33 @@ using namespace std;
 class Solution {
 public:
 	vector<int> spiralOrder(vector<vector<int> > &matrix) {
+        int m = matrix.size();
+        if (!m) return vector<int>();
+        int n = matrix[0].size();
+        vector<int> ret;
+        int row_s = 0, row_e = m - 1, col_s = 0, col_e = n - 1;
+        while (row_s <= row_e && col_s <= col_e) {
+            if  (row_s == row_e && col_s == col_e) {
+                ret.push_back(matrix[row_s][col_s]);
+            } else if (row_s == row_e) {
+                for (int j = col_s; j <= col_e; j++) ret.push_back(matrix[row_s][j]);
+            } else if (col_s == col_e) {
+                for (int i = row_s; i <= row_e; i++) ret.push_back(matrix[i][col_e]);
+            } else {
+                for (int j = col_s; j <= col_e; j++) ret.push_back(matrix[row_s][j]);
+                for (int i = row_s + 1; i <= row_e; i++) ret.push_back(matrix[i][col_e]);
+                for (int j = col_e - 1; j >= col_s; j--) ret.push_back(matrix[row_e][j]);
+                for (int i = row_e - 1; i > row_s; i--) ret.push_back(matrix[i][col_s]);
+            }
+            row_s++;
+            row_e--;
+            col_s++;
+            col_e--;
+        }
+        return ret;
+    }
+	//----------------------------------------------------------//
+	vector<int> spiralOrder(vector<vector<int> > &matrix) {
     	vector<int> res;
 		if (matrix.size() == 0)
 			return res;
