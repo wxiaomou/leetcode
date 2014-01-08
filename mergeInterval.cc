@@ -6,7 +6,35 @@
 #include <algorithm>
 using namespace std;
 
-  struct Interval {
+struct myclass {
+  bool operator() (const Interval i,const Interval j) { return (i.start < j.start);}
+} myOp;
+
+class Solution {
+public:
+    vector<Interval> merge(vector<Interval> &intervals) {
+        int n = intervals.size();
+        if (!n) return vector<Interval>();
+        sort(intervals.begin(), intervals.end(), myOp);
+        vector<Interval> ret(1, intervals[0]);
+        for (int i = 1; i < n; ++i) {
+            int k = ret.size() - 1;
+            int end = ret[k].end;
+            if (end < intervals[i].start) {
+                ret.push_back(intervals[i]);
+                continue;
+            } else if (end >= intervals[i].end) {
+                continue;
+            } else {
+                ret[k].end = intervals[i].end;
+            }
+        }
+        return ret;
+    }
+};
+
+//----------------------------------------------//
+struct Interval {
       int start;
       int end;
       Interval() : start(0), end(0) {}
