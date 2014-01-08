@@ -11,6 +11,40 @@ struct Interval {
  
 class Solution {
 public:
+	vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
+        int n = intervals.size();
+        if (!n) return vector<Interval>(1, newInterval);
+        int i = 0;
+        while (i < n && intervals[i].start < newInterval.start) i++;
+        if (!i)
+            intervals.insert(intervals.begin(), newInterval);
+        else if (i == n)
+            intervals.push_back(newInterval);
+        else 
+            intervals.insert(intervals.begin() + i, newInterval);
+            
+        return merge(intervals);
+    }
+    
+     vector<Interval> merge(vector<Interval> &intervals) {
+        int n = intervals.size();
+        if (!n) return vector<Interval>();
+        vector<Interval> ret(1, intervals[0]);
+        for (int i = 1; i < n; ++i) {
+            int k = ret.size() - 1;
+            int end = ret[k].end;
+            if (end < intervals[i].start) {
+                ret.push_back(intervals[i]);
+                continue;
+            } else if (end >= intervals[i].end) {
+                continue;
+            } else {
+                ret[k].end = intervals[i].end;
+            }
+        }
+        return ret;
+    }
+	//-----------------------------------------------------------//
     vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
 			vector<Interval> ret;
 			int first = -1;
