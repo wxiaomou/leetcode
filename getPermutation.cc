@@ -16,10 +16,11 @@ http://fisherlei.blogspot.com/2013/04/leetcode-permutation-sequence-solution.htm
             }
         }
         return ret;
-    }*/
+    } too long*/
 
     // we have n! permutation total, except first digit we have (n - 1)! permutation, so for except digit i we have (n - i - 1)! permutation.
-    // for chosen = k / per_cnt; per_cnt is the permutation from digit i + i to n - 1; and digits i will increase if k is larger than (n - i - 1)!
+    // think from the first digit, found the chosen remove it and move on like recursion
+    // for chosen = k / per_cnt; per_cnt is the permutation from digit i + 1 to n - 1; and digits i will increase if k is larger than (n - i - 1)!
     // then remove the chosen num, decrease k by k % per_cnt; like recursion.    
     string getPermutation(int n, int k) {
         vector<int> num;
