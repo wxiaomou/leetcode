@@ -27,6 +27,28 @@ class Solution {
         return root;
     }
 
+    //-----------------------------------------------------------------//
+    TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
+        int n = inorder.size();
+        if (!n) return NULL;
+        return build(postorder, 0, n - 1, inorder, 0, n - 1);
+    }
+    
+    TreeNode *build(vector<int> &postorder, int p_b, int p_e, vector<int> &inorder, int i_b, int i_e) {
+        if (p_b > p_e) return NULL;
+        TreeNode *root = new TreeNode(postorder[p_e]);
+        if (p_b == p_e) return root;
+        int len = 0;
+        
+        for (int i = i_b; i <= i_e; ++i) {
+            if (inorder[i] == postorder[p_e]) break;
+            len++;
+        }
+        root->right = build(postorder, p_b + len, p_e - 1, inorder, i_b + len + 1, i_e);
+        root->left = build(postorder, p_b, p_b + len - 1, inorder, i_b, i_b + len - 1);
+    }
+
+
     /*
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
         if (!inorder.size()) return NULL;
