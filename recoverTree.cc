@@ -14,7 +14,7 @@ struct TreeNode {
 };
 class Solution {
 public:
-              vector<TreeNode *> inorder;
+    vector<TreeNode *> inorder;
     void recoverTree(TreeNode *root) {
   			if (!root)
 					return;
@@ -64,7 +64,7 @@ public:
 			return;
 		}
 };
-/* O(1) space Solution
+/* !!!!!!!!!!!!!O(1) space Solution
 
 class Solution {
 public:
