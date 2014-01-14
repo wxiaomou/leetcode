@@ -35,34 +35,33 @@ class Solution {
         connect (root->right); //right first
         connect (root->left);
     }
+
     /*    
     void connect(TreeLinkNode *root) {
         if (!root) return;
-        TreeLinkNode *p = NULL;
+        TreeLinkNode *p = NULL;;
         if (root->left) {
             if (root->right) {
                 root->left->next = root->right;
-                p = root->right;
             } else {
                 p = root->left;
             }
         }
-        
-        if (root->right) {
-            p = root->right;
-        }
-        
-        if (p && root->next) {
-            TreeLinkNode *tmp = root->next;
-            while (!tmp->left && !tmp->right && tmp->next) tmp = tmp->next;
-            if (tmp->left)
-            p->next = tmp->left;
-            else if (tmp->right)
-            p->next = tmp->right;
-            else
+        if (root->right) p = root->right;
+        if (p) {
+            TreeLinkNode *cur = root->next;
             p->next = NULL;
+            while (cur) {
+                if (cur->left) {
+                    p->next = cur->left;
+                    break;
+                } else if (cur->right) {
+                    p->next = cur->right;
+                    break;
+                }
+                cur = cur->next;
+            }
         }
-        //right first
         connect(root->right);
         connect(root->left);
     }
