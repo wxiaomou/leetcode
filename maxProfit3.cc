@@ -23,4 +23,25 @@ public:
         
         return ret;
     }
+    //--------------------------------------------------//
+    int maxProfit(vector<int> &prices) {
+        int n = prices.size();
+        if (n < 2) return 0;
+        vector<int> ref(n, 0);
+        int ret = 0;
+        int _min = prices[0];
+        int _max = prices[n - 1];
+        for (int i = 1; i < n; ++i) {
+           _min = min(_min, prices[i]);
+           ref[i] = max(prices[i] - _min, ref[i - 1]);
+        }
+        
+        for (int i = n - 2; i >= 0; i--) {
+            _max = max(_max, prices[i]);
+            int tmp = 0;
+            if (i > 0) tmp = ref[i - 1];
+            ret = max(ret, tmp + _max - prices[i]);
+        }
+        return ret;
+    }
 };
