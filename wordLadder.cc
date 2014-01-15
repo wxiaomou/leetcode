@@ -13,14 +13,14 @@ public:
             if (str == end) return len;
             q.pop();
             for (int i = 0; i < str.length(); i++) {
-                if(dict.empty()) break;
+                //if(dict.empty()) break; //should not break if dict is empty here, cause end may not in dict, e.g. cog, should be a bug?
                 string bk = str;
                 for (char c = 'a'; c <= 'z'; c++) {
                     str[i] = c;
                     if (dict.count(str) != 0) {
                         q.push(make_pair(str, len + 1));
                         dict.erase(str);
-                        if(dict.empty()) break;
+                        //if(dict.empty()) break;
                     }
                     str = bk;
                 }
@@ -30,3 +30,21 @@ public:
         return 0;
     }
 };
+
+/*
+e.g.
+start = "hit";
+end = "cag";
+
+dict = {"hot", "dot", "lot", "dog", "log", "cog"};
+
+we have two shortest ways:
+
+hit->hot->dot->dog->cog->cag;
+hit->hot->lot->log->cog->cag;
+
+if we remove from dict right after we push str in queue ww will miss solutions, but this question is ask for the shortest length so this fine.
+After dog->cog, cog is removed from dict so log cannot reach the end. So in question 2 need remove dicts after a level finished.
+
+
+*/
