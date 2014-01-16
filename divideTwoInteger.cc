@@ -2,6 +2,38 @@
 using namespace std;
 class Solution {
 public:
+	int divide(int dividend, int divisor) {
+        if (!divisor || !dividend) return 0;
+        bool neg = (divisor < 0) ^ (dividend < 0);
+        if (divisor == 1) return dividend;
+        unsigned int a = dividend, b = divisor;
+        if (dividend < 0) a = (unsigned int)( dividend ^ (-1) ) + 1;// !!!!!!!!! + 1 
+        if (divisor < 0) b = (unsigned int)( divisor ^ (-1) ) + 1;
+        int ret = myDiv(a, b);
+        if (neg) return -ret;
+        return ret;
+    }
+    
+    int myDiv(unsigned int a, unsigned int b) {
+        int left = 0;
+        unsigned int ref = b;
+        while (a > b) {
+            b <<= 1;
+            left++;
+        }
+        if (a == b) return 1 << left;
+        int ret = 0;
+        while (a >= ref) {
+            if (a >= b) {
+                a -= b;
+                ret += 1 << left;
+            }
+            left--;
+            b >>= 1;
+        }
+        return ret;
+    }
+	//---------------------------------------//
 	 int divide(int dividend, int divisor) {
         if (!divisor) return 0;
         if (dividend == divisor) return 1;
@@ -11,7 +43,7 @@ public:
         unsigned int m_dividend = dividend;
         unsigned int m_divisor = divisor;
 
-        if (dividend < 0) m_dividend = (unsigned int)(dividend ^ -1) + 1;
+        if (dividend < 0) m_dividend = (unsigned int)(dividend ^ -1) + 1;// !!!!!!!!!!!!!!!! +1 !!!!!!!!!!!!!!
         if (divisor < 0) m_divisor = (unsigned int)(divisor ^ -1) + 1;
         if (m_dividend < m_divisor) return 0;
         const int ref = m_divisor;
