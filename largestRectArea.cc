@@ -24,7 +24,11 @@ class Solution {
        		while (!s.empty()) s.pop();
        		for (int i = n - 1; i >= 0; --i) {
            		int t = n; // !!!t is the leftest item which ouosidet the range in which height[i] is minimum, so t = s.top() and we don't need to + 1, becuse t is leftest outside range
-           		while (!s.empty() && height[s.top()] >= height[i]) s.pop(); //find all the height continus on the right
+           		           // need to be n!!!
+                        // cause if s is not empty s.top() is the leftest out of range, so t - i we do not +1, 
+                        //but if it empty we cannot use n - 1, cause we miss one there and we cannot simply change to t - i + 1, 
+                        //cause this will mess up the no empty case;
+              while (!s.empty() && height[s.top()] >= height[i]) s.pop(); //find all the height continus on the right
            		if (!s.empty())
                		t = s.top();
            		area[i] += t - i - 1; // add the right part exclude it self

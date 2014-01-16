@@ -47,7 +47,9 @@ public:
 			}
 
 			if (s.empty())
-				t = n;
+				t = n;   // need to be n!!!
+                         // cause if s is not empty s.top() is the leftest out of range, so t - i we do not +1, but if it empty we cannot use n - 1,
+                         // cause we miss one there and we cannot simply change to t - i + 1, cause this will mess up the no empty case;
 			else
 				t = s.top();
 
