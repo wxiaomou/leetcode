@@ -24,6 +24,7 @@ public:
         }
         return ret;
     }
+    
     /*
      int longestConsecutive(vector<int> &num) {
         int ret = 0;
