@@ -5,6 +5,40 @@ using namespace std;
 class Solution {
 public:
 	int longestValidParentheses(string s) {
+        int len = 0;
+        int n = s.length();
+        int j = 0;
+        int left = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == ')') {
+                left--;
+                if (left < 0) {
+                    left = 0;
+                    j = i + 1;
+                }
+                if (left == 0) len = max(len, i - j + 1);
+            } else if (s[i] == '(') {
+                left ++;
+            }
+        }
+        left = 0;
+        j = n - 1;
+        for (int i = n - 1; i >= 0; i--) {
+            if (s[i] == '(') {
+                left--;
+                if (left < 0) {
+                    left = 0;
+                    j = i - 1;
+                }
+                if (left == 0) len = max(len, j - i + 1);
+            } else if (s[i] == ')') {
+                left ++;
+            }
+        }
+        return len;
+    }
+	//--------------------------------------//
+	int longestValidParentheses(string s) {
         int n = s.length();
         if (n < 2) return 0;
         int ret = 0;
@@ -44,6 +78,7 @@ public:
         }
         return ret;
     }
+
 	//--------------------------------------//
 	int longestValidParentheses(string s) {
 		if (2 > s.size())
