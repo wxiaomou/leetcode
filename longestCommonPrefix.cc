@@ -5,6 +5,24 @@ using namespace std;
 class Solution {
 public:
 	string longestCommonPrefix(vector<string> &strs) {
+        string ret = "";
+        int n = strs.size();
+        if (!n) return ret;
+        int level = 0;
+        char cur;
+        while (strs[0][level] != '\0') {
+            cur = '\0';
+            for (int i = 0; i < n; i++) {
+                if (cur == '\0') cur = strs[i][level];
+                if (strs[i][level] == '\0' || cur != strs[i][level]) return ret;
+            }
+            ret += cur;
+            level++;
+        }
+        return ret;
+    }
+	//--------------------------------------------------//
+	string longestCommonPrefix(vector<string> &strs) {
         if (!strs.size()) return "";
         int i = 0;
         string ret = "";
