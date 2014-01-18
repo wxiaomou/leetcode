@@ -5,7 +5,7 @@ using namespace std;
 
 class Solution {
 public:
-	i/*nt lengthOfLongestSubstring(string s) {
+	/*int lengthOfLongestSubstring(string s) {
     if (!s.length())
 			return 0;
 
