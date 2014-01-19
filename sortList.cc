@@ -9,6 +9,52 @@
 class Solution {
 public:
     ListNode *sortList(ListNode *head) {
+        if (!head) return head;
+        int pivot = head->val;
+        ListNode *cur = head->next;
+        head->next = NULL; //!!!!!!!!!!!!!!O.W. will have loop
+        ListNode *left = NULL, *left_cur = NULL, *right = NULL, *right_cur = NULL;
+        bool doLeft = false, doRight = false;
+        
+        while (cur) {
+            if (cur->val <= pivot) {
+                if (!left) {
+                    left = cur;
+                    left_cur = left;
+                } else {
+                    if (left_cur->val > cur->val) doLeft = true;
+                    left_cur->next = cur;
+                    left_cur = left_cur->next;
+                }
+            } else {
+                if (!right) {
+                    right = cur;
+                    right_cur = right;
+                } else {
+                    if (right_cur->val > cur->val) doRight = true;
+                    right_cur->next = cur;
+                    right_cur = right_cur->next;
+                }
+            }
+            cur = cur->next;
+        }
+        
+        ListNode *ret = head;
+        if (left) {
+            left_cur->next = NULL;
+            ret = doLeft ? sortList(left) : left;
+            cur = ret;
+            while(cur->next) cur = cur->next;
+            cur->next = head;
+        }
+        if (right) {
+            right_cur->next = NULL;
+            head->next = doRight ? sortList(right) : right;
+        }
+        return ret;
+    }
+    //-------------------------------------------//
+    ListNode *sortList(ListNode *head) {
         if (!head) return NULL;
         if (!head->next) return head;
         ListNode * pivot = head;
