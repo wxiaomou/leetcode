@@ -5,7 +5,7 @@ using namespace std;
 class Solution {
 public:
 	double pow(double x, int n) {
-		      if (!n)
+	    if (!n)
     		return 1.0;
 		 
 		double ret = 1.0;
