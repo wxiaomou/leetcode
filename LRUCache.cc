@@ -77,11 +77,51 @@ public:
 struct Node {
      int val;
      int key;
+     Node(int x, int y) : key(x), val(y) {}
+};
+class LRUCache{
+private:
+    int limit;
+    list<Node> q;
+    unordered_map<int, list<Node>::iterator> hash;
+public:
+    LRUCache(int capacity) {
+        limit = capacity;
+    }
+    
+    int get(int key) {
+        if (hash.count(key) == 0) return -1;
+        q.splice(q.begin(), q, hash[key]);
+        hash[key] = q.begin();
+        return (*q.begin()).val;
+    }
+    
+    void set(int key, int value) {
+        if (hash.count(key) > 0) {
+            q.splice(q.begin(), q, hash[key]);
+            hash[key] = q.begin();
+            (*q.begin()).val = value;
+        } else {
+            if (q.size() >= limit) {
+                int key_remove = q.back().key;
+                hash.erase(key_remove);
+                q.pop_back();
+            } 
+            Node tmp(key, value);
+            q.push_front(tmp);
+            hash[key] = q.begin();
+        }
+    }
+};
+//----------------------------------//
+struct Node {
+     int val;
+     int key;
      Node(int x, int y) : val(x), key(y) {}
 };
 class LRUCache{
 private:
-int size;
+    int size;
 list<Node> q;
 map<int, list<Node>::iterator> hash;
 public:
@@ -114,5 +154,4 @@ public:
             hash[key] = q.begin();
         }
     }
-
 };
