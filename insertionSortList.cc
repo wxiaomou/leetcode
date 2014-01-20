@@ -9,8 +9,6 @@
 class Solution {
 public:
     ListNode *insertionSortList(ListNode *head) {
-        // IMPORTANT: Please reset any member data you declared, as
-        // the same Solution instance will be reused for each test case.
         if (!head) return NULL;
         if (!head->next) return head;
         ListNode *dummy = new ListNode(INT_MIN);
@@ -35,5 +33,39 @@ public:
             
         }
         head = head->next;
+    }
+    //----------------------------------------------//
+     ListNode *insertionSortList(ListNode *head) {
+        if (!head) return NULL;
+        ListNode *ret = head;
+        ListNode *cur = head->next;
+        ret->next = NULL;
+        while (cur) {
+            if (ret->val >= cur->val) {
+                ListNode *tmp = cur->next;
+                cur->next = ret;
+                ret = cur;
+                cur = tmp;
+            } else {
+                ListNode *cur1 = ret;
+                while (cur1->next) {
+                    if (cur1->next->val > cur->val) {
+                        ListNode *tmp = cur1->next;
+                        ListNode *tmp1 = cur->next;
+                        cur1->next = cur;
+                        cur->next = tmp;
+                        cur = tmp1;
+                        break;
+                    } 
+                    cur1 = cur1->next;
+                }
+                if (!cur1->next) {
+                    cur1->next = cur;
+                    cur = cur->next;
+                    cur1->next->next = NULL;
+                }
+            }
+        }
+        return ret;
     }
 };
