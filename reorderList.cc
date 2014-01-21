@@ -8,6 +8,28 @@
  */
 class Solution {
 public:
+    void reorderList(ListNode *head) {
+        if (!head) return;
+        stack<ListNode *> s;
+        ListNode *first = head, *second = head;
+        while (second->next && second->next->next) {
+            first = first->next;
+            second = second->next->next;
+        }
+        second = first->next;
+        for (ListNode * cur = second; cur != NULL; cur = cur->next) s.push(cur);
+        first->next = NULL;//!!!!!!!!!!!!!!!better than lower one. seperate the list into two part to avoid loop!!!!!!!!!!!!
+        first = head;
+        while (s.size()) {
+            second = s.top();
+            s.pop();
+            ListNode *tmp = first->next;
+            first->next = second;
+            first->next->next = tmp;
+            first = tmp;
+        }
+    }
+
     //smarter way to handle the odd or even issue.
      void reorderList(ListNode *head) {
         if (!head || !head->next) return; 
