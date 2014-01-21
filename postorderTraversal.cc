@@ -7,7 +7,7 @@
 
 using namespace std;
 
- struct TreeNode {
+struct TreeNode {
      int val;
      TreeNode *left;
      TreeNode *right;
@@ -15,16 +15,33 @@ using namespace std;
  };
 class Solution {
 public:
+    //betterway
+    vector<int> postorderTraversal(TreeNode *root) {
+        if (!root) return vector<int>();
+        vector<int> ret;
+        stack<TreeNode *> s;
+        s.push(root);
+        while (s.size()) {
+            TreeNode *tmp = s.top();
+            s.pop();
+            if (tmp) {
+                if (tmp->left) s.push(tmp->left);
+                if (tmp->right) s.push(tmp->right);
+                ret.insert(ret.begin(), tmp->val);
+            }
+        }
+        return ret;
+    }
+    //-------------------------------------------------------//
     vector<int> postorderTraversal(TreeNode *root) {
         // IMPORTANT: Please reset any member data you declared, as
         // the same Solution instance will be reused for each test case.
         vector<int> ret;
         if (!root) return ret;
-        stack<pair<TreeNode *, bool> > s;
-        s.push(pair<TreeNode *, bool>(root, false));
+        stack<pair<TreeNode *, bool> > s;http://www.codeskulptor.org/#examples-spaceship.py
         while (s.size()) {
             pair<TreeNode *, bool> &tmp = s.top(); //!!!need to be refernece other the line 40 won't chage the second part
-																									 //change line 40 to s.top().second = true not work, because s will add new item, so we need tmp to be a reference
+												   //change line 40 to s.top().second = true not work, because s will add new item, so we need tmp to be a reference
             if (!tmp.second) {
                 if (!tmp.first->right && !tmp.first->left) {
                     ret.push_back(tmp.first->val);
