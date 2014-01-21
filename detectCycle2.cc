@@ -24,6 +24,7 @@ public:
             pre = pre->next;
             post = post->next;
         }
+        
         return pre;
     }
 };
