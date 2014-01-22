@@ -2,7 +2,7 @@ class Solution {
 public:
     int singleNumber(int A[], int n) {
         // IMPORTANT: Please reset any member data you declared, as
-        // the same Solution instance will be reused for each test case.
+        // the same Solution instance will be reused for each test cas
         if (!n) return 0;
         int ones = 0, twos = 0, _three = 0;
         for (int i = 0; i < n; i++) {
