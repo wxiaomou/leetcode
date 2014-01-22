@@ -1,5 +1,48 @@
 //refs to http://www.cnblogs.com/feiling/p/3357067.html "dp + dfs"
 public class Solution {
+     public ArrayList<String> wordBreak(String s, Set<String> dict) {
+        ArrayList<String> ret = new ArrayList();
+        int n = s.length();
+        if (n == 0) return ret;
+        boolean[][] ref = new boolean[n][n + 1];
+        for (int len = 1; len <= n; len++) {
+            for (int i = 0; i < n - len + 1; i++) {
+                if (dict.contains(s.substring(i, i + len))) {
+                    ref[i][len] = true;
+                    continue;
+                }
+                
+                for (int k = 1; k < len; k++) {
+                    if (ref[i][k] && ref[i + k][len - k]) 
+                        ref[i][len] = true;
+                }
+            }
+        }
+        if (ref[0][n]) dfs(s, dict, 0, 0, ret, new StringBuffer(), ref);
+        
+        return ret;
+    }
+    
+    private void dfs (String s, Set<String> dict, int start, int depth, ArrayList<String> ret, StringBuffer sb, boolean[][] ref) 
+    {
+        if (depth == s.length()) {
+            String tmp = sb.toString();
+            ret.add(tmp.substring(0, tmp.length() - 1));
+            return;
+        }
+        
+        for (int i = 1; i <= s.length() - start; i++) {
+            if (ref[start][i]) {
+                if ( dict.contains(s.substring(start, start + i)) ) {
+                    int beforeAddlen = sb.length();
+                    sb.append(s.substring(start, start + i) + " ");
+                    dfs(s, dict, start + i, start + i, ret, sb, ref);
+                    sb.delete(beforeAddlen, sb.length());
+                }
+            }
+        }
+    }
+    //--------------------------------------------------------------//
     public ArrayList<String> wordBreak(String s, Set<String> dict) {
         ArrayList<String> ret = new ArrayList<String>();
         if (s.length() == 0 ) return ret;
