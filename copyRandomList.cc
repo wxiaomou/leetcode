@@ -10,8 +10,7 @@ class Solution {
 public:
     map<RandomListNode *, RandomListNode *> hash;
     RandomListNode *copyRandomList(RandomListNode *head) {
-        // IMPORTANT: Please reset any member data you declared, as
-        // the same Solution instance will be reused for each test case.
+        
         if (!head) return NULL;
         if (hash.find(head) != hash.end())
             return hash.find(head)->second;
