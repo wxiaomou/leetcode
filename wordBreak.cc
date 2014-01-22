@@ -15,7 +15,7 @@ public:
             if ( dict.find(s.substr(0, i + 1)) != dict.end() ) {
                 if ( _wordBreak(s.substr(i + 1), dict, ref, i + 1) ) {
                     ref[i] = 1;
-                     return true;
+                    return true;
                 }
             }
         }
