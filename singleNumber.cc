@@ -1,5 +1,6 @@
 class Solution {
 public:
+	
     int singleNumber(int A[], int n) {
         if (!n) return 0;
         int ret = 0;
