@@ -26,4 +26,38 @@ public:
         }
         return ret;
     }
+
+    //----------------------------------------------//
+     int candy(vector<int> &ratings) {
+        int n = ratings.size();
+        vector<int> ref(n, 1);
+        int i = 0;
+        while (i < n) {
+            int add = 1;
+            while (i + 1 < n && ratings[i + 1] > ratings[i]) {
+               ref[i + 1] += add;
+               add++;
+               i++;
+            }
+            i++;
+        }
+        
+        i = n - 1;
+        while (i >= 0) {
+            int add = 1;
+             while (i - 1  >= 0 && ratings[i - 1] > ratings[i]) {
+              if (ref[i - 1]  == 1) {
+                ref[i - 1] += add;
+                add++;
+              } else if (ref[i - 1] < add + 1) {
+                  ref[i - 1] = 1 + add;
+              }
+              i--;
+            }
+            i--;
+        }
+        int ret = 0;
+        for (i = 0; i < n; ++i) ret += ref[i];
+        return ret;
+     }
 };
