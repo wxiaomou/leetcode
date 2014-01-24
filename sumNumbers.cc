@@ -25,6 +25,7 @@ public:
             ret += pre;
             return;
        }
+       
        if (root->left) _sumNumbers(root->left, ret, pre);
        if (root->right) _sumNumbers(root->right, ret, pre);
        return;
