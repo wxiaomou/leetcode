@@ -1,6 +1,22 @@
 class Solution {
 public:
     int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
+        int n = gas.size();
+        if (!n) return -1;
+        int total = 0;
+        int start = 0;
+        for (int i = 0; i < n; i++) {
+            int tmp = total;
+            total += gas[i];
+            total -= cost[i];
+            if (total < tmp && tmp <= 0)
+                start = i + 1;
+        }
+        if (total >= 0) return start;
+        return -1;
+    }
+    //-----------------------------------------------//
+    int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
         // IMPORTANT: Please reset any member data you declared, as
         // the same Solution instance will be reused for each test case.
         if (!gas.size()) 
