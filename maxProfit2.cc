@@ -12,7 +12,6 @@ class Solution {
         }
         return ret;
     }
-
     //--------------------------------------------------------//
     int maxProfit(vector<int> &prices) {
         int n = prices.size();
