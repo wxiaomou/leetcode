@@ -1,6 +1,7 @@
 //df reference to http://fisherlei.blogspot.com/2013/03/leetcode-palindrome-partitioning-ii.html
 class Solution {
 public:
+    
     int minCut(string s) {
         if (!s.size()) return 0;
         int n = s.length();
