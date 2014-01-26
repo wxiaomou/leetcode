@@ -15,6 +15,7 @@ class Solution {
         connect(root->right);
         connect(root->left);
     }
+    
     //-------------------------------------//
     void connect(TreeLinkNode *root) {
         if (!root) return;
