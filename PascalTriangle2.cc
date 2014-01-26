@@ -27,4 +27,19 @@ class Solution {
         }
         return ret.size() > ret1.size() ? ret : ret1;
     }
+
+    //---------------------recursion---------------------------//
+     vector<int> getRow(int rowIndex) {
+        //if (!rowIndex) return vector<int>();
+        if (!rowIndex) return vector<int> (1, 1);
+        vector<int> tmp = getRow(rowIndex - 1);
+        vector<int> ret;
+        int n = tmp.size();
+        ret.push_back(1);
+        for (int i = 0; i < n - 1; i++) {
+            ret.push_back(tmp[i] + tmp[i + 1]);
+        }
+        ret.push_back(1);
+        return ret;
+    }
 };
