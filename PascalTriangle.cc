@@ -20,7 +20,29 @@ class Solution {
                 ret.push_back(cur);
             }
         }
+        return ret;   
+    }
+    //-----------------------recursion--------------------------//
+    vector<vector<int> > generate(int numRows) {
+        if (!numRows) return vector<vector<int> >();
+        vector<vector<int>> ret;
+        _gen(numRows, ret);
         return ret;
-        
+    }
+    void _gen(int num, vector<vector<int>> &ret) {
+        if (!num) return;
+        if (!ret.size()) {
+            ret.push_back(vector<int>(1,1));
+        } else {
+            vector<int> tmp;
+            int n = ret.size();
+            tmp.push_back(1);
+            for (int i = 0; i < ret[n - 1].size() - 1; i++) {
+                tmp.push_back(ret[n - 1][i] + ret[n - 1][i + 1]);
+            }
+            tmp.push_back(1);
+            ret.push_back(tmp);
+        }
+        _gen(num - 1, ret);
     }
 };
