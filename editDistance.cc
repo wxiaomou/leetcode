@@ -19,4 +19,24 @@ public:
         }
         return dis[m][n];
     }
+    //-----------------------------------------------------------------------//
+    int minDistance(string word1, string word2) {
+        int m = word1.length();
+        int n = word2.length();
+        if (!m) return n;
+        if (!n) return m;
+        int matrix[m + 1][n + 1];
+        matrix[m][n] = 0;
+        for (int i = m - 1; i >= 0; i--) matrix[i][n] = m - i;
+        for (int j = n - 1; j >= 0; j--) matrix[m][j] = n - j;
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                if (word1[i] == word2[j])
+                    matrix[i][j] = matrix[i + 1][j + 1];
+                else 
+                    matrix[i][j] = min(matrix[i + 1][j + 1], min(matrix[i + 1][j], matrix[i][j + 1])) + 1;
+            }
+        }
+        return matrix[0][0];
+    }
 };
