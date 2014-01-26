@@ -25,7 +25,6 @@ public:
                     str = bk;
                 }
             }
-            
         }
         return 0;
     }
