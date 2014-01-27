@@ -25,6 +25,36 @@ class Solution {
         }
         return matrix[i][j];
     }
+    //-----------------------------------------------------//
+     int numDistinct(string S, string T) {
+        int n = S.length();
+        int m = T.length();
+        if (m > n) return 0;
+        int **ref = new int *[m + 1];//[m + 1][n];
+        for (int i = 0; i <= m; i++) ref[i] = new int[n + 1];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) 
+                ref[i][j] = -1;
+        }
+        for (int j = 0; j <= n; j++) ref[m][j] = 1;
+        for (int i = 0; i < m; i++) ref[i][n] = 0;
+        return rec(S, T, 0, 0, ref);
+    }
+    
+    int rec(string &S, string &T, int i, int j, int **ref) {
+        if (ref[i][j] >= 0) return ref[i][j];
+        
+        if (S[j] == T[i]) {
+            ref[i][j] = rec(S, T, i + 1, j + 1, ref) + rec(S, T, i, j + 1, ref);
+        } else {
+            ref[i][j] = rec(S, T, i, j + 1, ref);
+        }
+        return ref[i][j];
+    }
+
+
+
+
     /*int numDistinct(string S, string T) {
         // IMPORTANT: Please reset any member data you declared, as
         // the same Solution instance will be reused for each test case.
