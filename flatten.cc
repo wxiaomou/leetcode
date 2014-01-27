@@ -9,6 +9,27 @@
  */
 class Solution {
     public:
+     void flatten(TreeNode *root) {
+        if (!root) return;
+        flatten(root->left);
+        TreeNode *left = root->left;
+        flatten(root->right);
+        TreeNode *right = root->right;
+        
+        root->left = NULL;
+        if (left) {
+            root->right = left;
+            TreeNode *cur = left;
+            while (cur->right) {
+                cur = cur->right;
+            }
+            cur->right = right; 
+        } else {
+            root->right = right;
+        }
+        return;
+    }
+    //---------------------------------------------------------//    
     void flatten(TreeNode *root) {
         // IMPORTANT: Please reset any member data you declared, as
         // the same Solution instance will be reused for each test case.
