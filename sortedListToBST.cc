@@ -18,6 +18,27 @@
 class Solution {
     public:
     TreeNode *sortedListToBST(ListNode *head) {
+        if (!head) return NULL;
+        ListNode *dummy = new ListNode(0);
+        dummy->next = head;
+        ListNode *pre = dummy;
+        ListNode *cur = head;
+        ListNode *post = head;
+        while (post->next && post->next->next) {
+            pre = pre->next;
+            cur = cur->next;
+            post = post->next->next;
+        }
+        pre->next = NULL;
+        post = cur->next;
+        cur->next = NULL;
+        TreeNode *ret = new TreeNode(cur->val);
+        ret->left = sortedListToBST(dummy->next);
+        ret->right = sortedListToBST(post);
+        return ret;
+    }
+    //--------------------------------------------------//
+    TreeNode *sortedListToBST(ListNode *head) {
         // IMPORTANT: Please reset any member data you declared, as
         // the same Solution instance will be reused for each test case.
         if (!head) return NULL;
