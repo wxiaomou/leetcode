@@ -25,6 +25,24 @@ public:
 			else 
 				return max(left, right) + 1;
     }
+
+    //---------------------------------------//
+    int minDepth(TreeNode *root) {
+        if (!root) return 0;
+        if (!root->left && !root->right) return 1;
+        int left = _min(root->left);
+        int right = _min(root->right);
+        return min(left, right) + 1;
+        
+    }
+    
+    int _min(TreeNode *root) {
+        if (!root) return INT_MAX;
+        if (!root->left && !root->right) return 1;
+        int left = _min(root->left);
+        int right = _min(root->right);
+        return min(left, right) + 1;
+    }
 };
 
 int main (int argc, char **argv) {
