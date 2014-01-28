@@ -15,6 +15,7 @@ class Solution {
         return _build(num, 0, num.size() - 1);
     }
     
+    
     TreeNode *_build(vector<int> &num, int begin, int end) {
         if (begin > end) return NULL;
         TreeNode *root = new TreeNode(num[(end + begin) / 2]);
