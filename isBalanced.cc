@@ -27,6 +27,24 @@ class Solution {
         if (l && r && (abs(h1 - h2) <= 1)) return true;
         else return false;
     }
+
+    //--------------------------------------//
+    bool ret = true; 
+    bool isBalanced(TreeNode *root) {
+        if (!root) return true;
+        int left = depth(root->left);
+        int right = depth(root->right);
+        if (abs(left - right) > 1) return false;
+        else return ret;
+    }
+    
+    int depth(TreeNode *root) {
+        if (!root) return 0;
+        int left = depth(root->left);
+        int right = depth(root->right);
+        if (abs(left - right) > 1) ret = false;
+        return max(left, right) + 1;
+    }
     /*bool isBalanced(TreeNode *root) {
         if (!root) return true;
         int left = depth(root->left);
