@@ -32,14 +32,14 @@ class Solution {
     	}
 
 		//------------------------------------------------------//
-		    TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {
+		TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {
 						int pend = preorder.size() - 1;
 						int iend = inorder.size() - 1;
 						if (pend <= -1 || iend <= -1) return NULL;
 						return _build(preorder, 0, pend, inorder, 0, iend);
         }
 				
-				TreeNode * _build(vector<int> &preorder, int p_begin, int pend, vector<int> &inorder, int i_begin, int iend) {
+	   TreeNode * _build(vector<int> &preorder, int p_begin, int pend, vector<int> &inorder, int i_begin, int iend) {
 					if (p_begin > pend || i_begin > iend) return NULL;
 					TreeNode *root = new TreeNode(preorder[p_begin]);
 					int index = i_begin;
@@ -48,7 +48,7 @@ class Solution {
 					root->left = _build(preorder, p_begin + 1, p_begin + pre_left_len, inorder, i_begin, index - 1);
 					root->right = _build(preorder, p_begin + pre_left_len + 1, pend, inorder, index + 1, iend);
 					return root;
-				}
+		}
 };
 
 int main() {
