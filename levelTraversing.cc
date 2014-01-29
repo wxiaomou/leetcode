@@ -36,7 +36,6 @@ public:
 					que.push(tmp->right);
 
 				count--;
-
 				if (!count) {
 					ret.push_back(lev);
 					lev.clear();
