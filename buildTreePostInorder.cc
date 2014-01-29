@@ -28,6 +28,7 @@ class Solution {
     }
 
     //-----------------------------------------------------------------//
+    
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
         int n = inorder.size();
         if (!n) return NULL;
