@@ -14,7 +14,7 @@ public:
         if (!root) return ret;
         vector<int> *l;
         l = new vector<int>;
-        //deque<TreeNode *> q;
+        //deque<TreeNode *> q; use two stack
         stack<TreeNode *> s1;
         stack<TreeNode *> s2;
         int cnt = 1;
