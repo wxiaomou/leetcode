@@ -13,6 +13,7 @@ struct TreeNode {
 };
 class Solution {
 public:
+        //recursion way
 		bool isSymmetric(TreeNode *root) {
 			if (!root)
 				return true;
@@ -30,6 +31,7 @@ public:
 			else 
 				return false;
 		}
+
 		// iterate by level and compare
         bool isSymmetric2(TreeNode *root) {
             if (!root) return true;
