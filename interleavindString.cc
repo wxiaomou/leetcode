@@ -5,6 +5,51 @@ using namespace std;
 
 class Solution {
 public:
+	int ** _m;
+    bool isInterleave(string s1, string s2, string s3) {
+        int m = s1.length();
+        int n = s2.length();
+        int k = s3.length();
+        if (!k) return true;
+        if (m + n != k) return false;
+        _m = new int*[m];
+        if (!m) return s2 == s3;
+        if (!n) return s1 == s3;
+        for (int i = 0; i < m; i++) _m[i] = new int [n];
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
+                _m[i][j] = -1;
+        // _m[m - 1][n - 1] = 1;
+        if (dp(s1, s2, s3, 0, 0) > 0)
+            return true;
+        else 
+            return false;
+    }
+    
+    int dp(string &s1, string &s2, string &s3, int i, int j) {
+        int m = s1.size(), n = s2.size();
+        if (i == m && j == n) return 1;
+        int ret1 = 0, ret2 = 0;
+        if (i == m) {
+            if (s2[j] == s3[i + j])
+                return dp(s1, s2, s3, i, j + 1);
+            else 
+                return 0;
+        }
+        if (j == n) {
+            if (s1[i] == s3[i + j])
+                return dp(s1, s2, s3, i + 1, j);
+            else 
+                return 0;
+        }
+        
+        if (_m[i][j] != -1) return _m[i][j];
+        if (i < m && s1[i] == s3[i + j]) ret1 = dp(s1, s2, s3, i + 1, j);
+        if (j < n && s2[j] == s3[i + j]) ret2 = dp(s1, s2, s3, i, j + 1);
+        _m[i][j] = ret1 | ret2;
+        return _m[i][j];
+    } 
+	//----------------------------------------------------------//
 	int **m;
     bool isInterleave(string s1, string s2, string s3) {
 	 if (s3.length() != (s1.length() + s2.length())) {
