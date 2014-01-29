@@ -5,6 +5,26 @@ using namespace std;
 class Solution {
 public:
 	int removeDuplicates(int A[], int n) {
+        if (!n) return 0;
+        int cur = A[0];
+        int i = 0, j = 1, cnt = 0;
+        while (j < n) {
+            if (A[j] != cur) {
+                A[++i] = A[j++];
+                cur = A[i];
+                cnt = 0;
+            } else if (cnt < 1) {
+                A[++i] = A[j++];
+                cnt++;
+            } else {
+                cnt++;
+                j++;
+            }
+        }
+        return i + 1;
+    }
+	//--------------------------------------//
+	int removeDuplicates(int A[], int n) {
 		if (!n)
     		return 0;
 		if (n == 1)
