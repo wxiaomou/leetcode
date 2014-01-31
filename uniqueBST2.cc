@@ -14,9 +14,9 @@ struct TreeNode {
 };
 class Solution {
 public:
-		vector<TreeNode *> generateTrees(int n) {
-			return doGenerateTrees(1, n);
-		}
+    vector<TreeNode *> generateTrees(int n) {
+		return doGenerateTrees(1, n);
+	}
 
     vector<TreeNode *> doGenerateTrees(int start, int end) {
 			vector<TreeNode *> res;
