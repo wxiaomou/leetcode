@@ -15,6 +15,25 @@ struct TreeNode {
 };
 class Solution {
 public:
+	bool ret = true;
+    bool isValidBST(TreeNode *root) {
+        if (!root) return true;
+        TreeNode *pre = NULL;
+        valid(root, pre);
+        return ret;
+    }
+    
+    void valid(TreeNode *root, TreeNode *&pre) {
+        if (!root) return;
+        valid(root->left, pre);
+        if (pre) {
+            if (pre->val >= root->val) ret = false;
+        }
+        pre = root;
+        valid(root->right, pre);
+        return;
+    }
+	//------------------------------------//
 	bool isValidBST(TreeNode *root) {
 		int pre = INT_MIN;
 		return recursion(root, pre);
