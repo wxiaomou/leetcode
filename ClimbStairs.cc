@@ -18,4 +18,19 @@ public:
 		}
 		return b; // should return b
 	}
+
+	//---------------------------------//
+	int climbStairs(int n) {
+        if (!n) return 0;
+        if (n == 1) return 1;
+        if (n == 2) return 2;
+        int ref[n];
+        ref[n - 1] = 1;
+        ref[n - 2] = 2;
+        for (int i = n - 3; i >= 0; i--) {
+            ref[i] = ref[i + 1] + ref[i + 2];
+        }
+        return ref[0];
+    }
+};
 };
