@@ -6,6 +6,7 @@ using namespace std;
 
 class Solution {
 public:
+	// ip addr cannot be 0xx, so the only way is set the bit to be 0, so when we met tmp = "0" , we should break and not add more digit in this section
  vector<string> restoreIpAddresses(string s) {
     	vector<string> res;
 		if (s.length() > 12 || s.length() < 4)
@@ -35,7 +36,7 @@ public:
 			//	break;
 			str += st;
 			recursion(s, str, i + 1, level + 1, res);
-      if (x == 0) break;// for case 0000!!! 101023 '0' will be only recurse itself  won't be case '01' 
+      		if (x == 0) break;// for case 0000!!! 101023 '0' will be only recurse itself  won't be case '01' 
 		}
 		return;
 	}
