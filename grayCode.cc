@@ -6,10 +6,9 @@ using namespace std;
 class Solution {
 public:
 	vector<int> grayCode(int n) {
-  vector<int> ret;
-    
+    vector<int> ret;
 		if (!n) {
-      ret.push_back(0);
+        ret.push_back(0);
 			return ret;
 		}
 		if (n == 1) {
@@ -26,6 +25,27 @@ public:
 		}
 		return ret;
 	}
+
+	//--------------------------------------------//
+	 vector<int> grayCode(int n) {
+        vector<int> ret(1, 0);
+        unordered_set<int> hash;
+        int cur = 0;
+        hash.insert(0);
+        int total = pow(2, n);
+        while (ret.size() < total) {
+            for (int i = 0; i < n; i++) {
+                int tmp = cur ^ (1 << i);
+                if (hash.count(tmp) == 0) {
+                    ret.push_back(tmp);
+                    hash.insert(tmp);
+                    cur = tmp;
+                    break;
+                }
+            }
+        }
+        return ret;
+    }
 
 };
 
