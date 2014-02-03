@@ -19,12 +19,13 @@ public:
 		int cur = 1 << (n - 1);
 		vector<int> tmp = grayCode(n - 1);
 		ret = tmp;
-		for (int i = tmp.size() - 1; i > -1; --i) {
+		for (int i = tmp.size() - 1; i > -1; --i) {  /* 每次倒过来这样保证相差是1位 e.g. ret{00, 01, 11, 10} -> tmp {110, 111, 101, 100} 010 和 110正好相差一位*/
 			tmp[i] |= cur;
 			ret.push_back(tmp[i]);
 		}
 		return ret;
 	}
+	
 
 	//--------------------------------------------//
 	 vector<int> grayCode(int n) {
