@@ -1,8 +1,4 @@
-// O(n^3)
-int maximalRectangle(vector<vector<char> > &matrix) {
-        int m = matrix.size();
-        if (!m) return 0;
-        int n = matrix[0].size();
+gi
         int _max = 0;
         for ( auto i = 0; i < m; ++i ) {
             for ( auto j = 0; j < n; j++ ) {
@@ -24,6 +20,7 @@ int maximalRectangle(vector<vector<char> > &matrix) {
         }
         return _max;
 }
+
 /* java solution
 public class Solution {
   public int maximalRectangle(char[][] matrix) {
