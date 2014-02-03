@@ -3,6 +3,32 @@
 using namespace std;
 class Solution {
 public:
+    int numDecodings(string s) {
+        int n = s.length();
+        if (!n) return 0;
+        int ref[n];
+        for (int i = 0; i < n; i++) ref[i] = -1;
+        return recur(s, 0, n, ref);
+    }
+    
+    int recur(string S, int i, int n, int ref[]) {
+        if (i > n) return 0;
+        if (i == n) return 1;
+        if (S[i] == '0') {
+            ref[i] = 0;
+            return 0;
+        }
+        if (ref[i] != -1) return ref[i];
+        if ( i < n - 1 && (S[i] < '2' || (S[i] == '2' && S[i + 1] <= '6')) ) 
+            ref[i] = recur(S, i + 1, n, ref) + recur(S, i + 2, n, ref);
+        else 
+            ref[i] = recur(S, i + 1, n, ref);
+        return ref[i];
+    }
+
+
+    
+    //----------------------------//
 	 int numDecodings(string s) {
         // Note: The Solution object is instantiated only once and is reused by each test case.
         if (!s.length()) return 0;
