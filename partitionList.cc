@@ -12,6 +12,37 @@ struct ListNode {
 };
 class Solution {
 public:
+
+	ListNode *partition(ListNode *head, int x) {
+        if (!head) return head;
+        ListNode *left = NULL, *right = NULL, *right_s = NULL, *cur = head;
+        while (cur) {
+            if (cur->val < x) {
+                if (!left) {
+                    left = cur;
+                    head = left;
+                } else {
+                    left->next = cur;
+                    left = left->next;
+                }
+            } else {
+                if (!right) {
+                    right = cur;
+                    right_s = cur;
+                } else {
+                    right->next = cur;
+                    right = right->next;
+                }
+            }
+            ListNode *tmp = cur->next;
+            cur->next = NULL;
+            cur = tmp;
+        }
+        if (left) left->next = right_s;
+        if (!head) return right;
+        return head;
+    }
+	//----------------------------------------------//
     ListNode *partition(ListNode *head, int x) {
 			if (!head)
 				return NULL;
