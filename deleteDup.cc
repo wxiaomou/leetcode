@@ -13,6 +13,24 @@ struct ListNode {
 };
 class Solution {
 public:
+	ListNode *deleteDuplicates(ListNode *head) {
+        if (!head) return NULL;
+        ListNode *cur = head->next, *pre = head;
+        int ref = pre->val;
+        while (cur) {
+            if (cur->val == ref) {
+                cur = cur->next;
+            } else {
+                ref = cur->val;
+                pre->next = cur;
+                cur = cur->next;
+                pre = pre->next;
+            }
+        }
+        pre->next = NULL;
+        return head;
+    }
+    //---------------------------------------------//
     ListNode *deleteDuplicates(ListNode *head) {
 			if (!head)
 				return NULL;
