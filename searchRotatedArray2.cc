@@ -32,6 +32,7 @@ public:
         
         return false;
     }
+    
 	//----------------------------------------//
 	bool search(int A[], int n, int target) {
 		int i = 0;
