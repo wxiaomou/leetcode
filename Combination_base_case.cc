@@ -3,6 +3,26 @@
 using namespace std;
 class Solution {
 public:
+	 vector<vector<int> > combine(int n, int k) {
+        if (!n) return vector<vector<int>> ();
+        bool ref[n];
+        for (int i = 0; i < n; i++) ref[i] = false;
+        vector<vector<int>> ret;
+        _com(n, k, 0, vector<int>(), ret);
+        return ret;
+    }
+    
+    void _com(int n, int k, int i, vector<int> pre, vector<vector<int>> &ret) {
+        if (!k)  {
+            ret.push_back(pre);
+            return;
+        }
+        if (i == n) return;
+        _com(n, k, i + 1, pre, ret);
+        pre.push_back(i + 1);
+        _com(n, k - 1, i + 1, pre, ret);
+    }
+	//----------------------------------------------//
     vector<vector<int> > combine(int n, int k) {
     	vector<vector<int> > ret;
 			if (n < 1 || k < 1)
