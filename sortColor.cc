@@ -3,6 +3,24 @@
 using namespace std;
 class Solution {
 public:
+	 void sortColors(int A[], int n) {
+        int i = -1;
+        int j = n;
+        for (int k = 0; k < j; k++) {
+            if (A[k] == 0) {
+                if (i == k) continue;
+                i++;
+                swap(A[i], A[k]);
+                k--;
+            } else if (A[k] == 2) {
+                j--;
+                swap(A[k], A[j]);
+                k--;
+            } 
+        }
+    }
+    
+    //----------------------------------------//
 	void sortColors(int A[], int n) {
 		if (!n)
 			return;
