@@ -16,8 +16,6 @@ public:
 					visit[i][j] = false;
 				}
 			}
-			//if (m + n  - 1< word.length())
-				//return false;
 			
 			for (int i = 0; i < m; i++) {
 				for (int j = 0; j < n; j++) {
