@@ -45,8 +45,7 @@ public:
 				}
 				
 			}
-        end++;		
-    	
+        	end++;		
 		}
 
 		return length <= S.length() ? S.substr(start, length) : "";
