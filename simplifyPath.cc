@@ -4,6 +4,34 @@
 using namespace std;
 class Solution {
 public:
+	 string simplifyPath(string path) {
+        string ret = "";
+        if (path[path.length() - 1] == '/') path = path.substr(0, path.length() - 1);
+        if (path[0] == '/') path = path.substr(1);
+        stack<string> s;
+        int n = path.length();
+        for (int i = 0; i < n; i++) {
+            int j = i;
+            while (j < n && path[j] != '/') j++;
+            if (i == j) continue;
+            string tmp = path.substr(i, j - i);
+            if (tmp == "..") {
+                if (!s.empty()) s.pop();
+            } else if (tmp != ".") {
+                s.push(tmp);
+            }
+            i = j;
+        }
+        while (!s.empty()) {
+            string tmp = s.top();
+            ret = tmp + ret;
+            s.pop();
+            ret = "/" + ret;
+        }
+        if (ret.size() == 0) ret = "/";
+        return ret;
+    }
+	//--------------------------------------//
 	string simplifyPath(string path) {
 		  if (path.length() == 1)
     		return "/";
