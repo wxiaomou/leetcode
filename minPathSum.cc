@@ -5,6 +5,23 @@ using namespace std;
 
 class Solution {
 public:
+	int minPathSum(vector<vector<int> > &grid) {
+        int m = grid.size();
+        if (!m) return 0;
+        int n = grid[0].size();
+        vector<int> tmp(n, 0);
+        vector<vector<int>> ret(m, tmp);
+        ret[m - 1][n - 1] = grid[m - 1][n - 1];
+        for (int i = m - 2; i >= 0; i--) ret[i][n - 1] = grid[i][n - 1] + ret[i + 1][n - 1];
+        for (int j = n - 2; j >= 0; j--) ret[m - 1][j] = grid[m - 1][j] + ret[m - 1][j + 1];
+        for (int i = m - 2; i >= 0; i--) {
+            for (int j = n - 2; j >= 0; j--) {
+                ret[i][j] = grid[i][j] + min(ret[i + 1][j], ret[i][j + 1]);
+            }
+        }
+        return ret[0][0];
+    }
+	//---------------------------------------//
 	int **matrix;		
 	int minPathSum(vector<vector<int> > &grid) {
     	if (grid.size() == 0)
