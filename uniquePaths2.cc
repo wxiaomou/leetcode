@@ -12,7 +12,7 @@ public:
 		if (obstacleGrid[m - 1][n - 1] == 1)
 			return 0;
 
-    int dp[m][n];
+    	int dp[m][n];
 		dp[m - 1][n - 1] = 1;
 		for (int i = m - 2; i >= 0; i--) {
 			if (obstacleGrid[i][n - 1] == 1)
