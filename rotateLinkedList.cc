@@ -41,6 +41,7 @@ public:
         cur->next = head;
         return post;
     }
+    
     //recursive way
     ListNode *rotateRight(ListNode *head, int k) {
 			if (!head || k == 0)
