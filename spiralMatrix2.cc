@@ -5,6 +5,22 @@ using namespace std;
 class Solition {
 public:
 	vector<vector<int> > generateMatrix(int n) {
+        if (!n) return vector<vector<int>>();
+        vector<int> tmp(n, 0);
+        vector<vector<int>> ret(n, tmp);
+        int cnt = 1;
+        for (int i = 0; i < n / 2; i++) {
+            for (int j = i; j < n - i; j++) ret[i][j] = cnt++;
+            for (int k = i + 1; k < n - i; k++) ret[k][n - i - 1] = cnt++;
+            for (int j = n - i - 2; j >= i; j--) ret[n - i - 1][j] = cnt++;
+            for (int k = n - i - 2; k > i; k--) ret[k][i] = cnt++;
+        } 
+        
+        if (n % 2) ret[n / 2][n / 2] = cnt;
+        return ret;
+    }
+	//---------------------------------------------------//
+	vector<vector<int> > generateMatrix(int n) {
         vector<int> tmp(n, 0);
         vector<vector<int>> ret(n, tmp);
         int num = 1;
