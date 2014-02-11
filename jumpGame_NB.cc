@@ -18,8 +18,8 @@ public:
 
 		return m >=i n - 1;
 
-		//--------------------------//
-		bool canJump(int A[], int n) {
+	//--------------------------//
+	bool canJump(int A[], int n) {
         if(!n) return true;
         int i = 0;
         int dist = i + A[i];
