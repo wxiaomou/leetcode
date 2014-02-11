@@ -32,7 +32,6 @@ public:
         return ret;
     }
 };
-
 //----------------------------------------------//
 struct Interval {
       int start;
