@@ -44,32 +44,32 @@ public:
     
     //recursive way
     ListNode *rotateRight(ListNode *head, int k) {
-			if (!head || k == 0)
-        		return head;
-			int i = 0;
-			ListNode *pre = head;
-			ListNode *cur = head;
-			while (i < k && cur != NULL) {
-				cur = cur->next;
-				i++;
-			}
+		if (!head || k == 0)
+        	return head;
+		int i = 0;
+		ListNode *pre = head;
+		ListNode *cur = head;
+		while (i < k && cur != NULL) {
+			cur = cur->next;
+			i++;
+		}
 		
-            //if k larger than the linklist length then divide and concur
-			if (!cur) {
-				return rotateRight(head, k - i);
-			}
-            if (i < k) {
-				return head;
-			}
-
-			while (cur->next) {
-				pre = pre->next;
-				cur = cur->next;
-			}
-			cur->next = head;
-			head = pre->next;
-			pre->next = NULL;
+        //if k larger than the linklist length then divide and concur
+		if (!cur) {
+			return rotateRight(head, k - i);
+		}
+        if (i < k) {
 			return head;
+		}
+
+		while (cur->next) {
+			pre = pre->next;
+			cur = cur->next;
+		}
+		cur->next = head;
+		head = pre->next;
+		pre->next = NULL;
+		return head;
     }
 };
 
