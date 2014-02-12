@@ -26,6 +26,7 @@ public:
         return merge(intervals);
     }
     
+
      vector<Interval> merge(vector<Interval> &intervals) {
         int n = intervals.size();
         if (!n) return vector<Interval>();
@@ -79,6 +80,33 @@ public:
 
 			return ret;
 	}
+};
+
+//----------------------------------------//
+struct myclass {
+  bool operator() (const Interval i,const Interval j) { return (i.start < j.start);}
+} myOp;
+
+class Solution {
+public:
+    vector<Interval> merge(vector<Interval> &intervals) {
+        int n = intervals.size();
+        if (!n) return intervals;
+        sort(intervals.begin(), intervals.end(), myOp);
+        vector<Interval> ret(1, intervals[0]);
+        for (int i = 1; i < n; i++) {
+            Interval &tmp = ret.back();
+            if (tmp.end > intervals[i].end) continue;
+            if (tmp.end >= intervals[i].start) tmp.end = intervals[i].end;
+            else ret.push_back(intervals[i]);
+        }
+        return ret;
+    }
+    
+    vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
+        intervals.push_back(newInterval);
+        return merge(intervals);
+    }
 };
 
 int main(int argc, char **argv) {
