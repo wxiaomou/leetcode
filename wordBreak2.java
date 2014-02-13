@@ -1,6 +1,54 @@
 //refs to http://www.cnblogs.com/feiling/p/3357067.html "dp + dfs"
 public class Solution {
      public ArrayList<String> wordBreak(String s, Set<String> dict) {
+        int n = s.length();
+        ArrayList<String> ret = new ArrayList<String>();
+        if (n == 0) return ret;
+        boolean [][]ref = new boolean[n][n + 1];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <= n; j++)
+                ref[i][j] = false;
+        }
+        
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = 1; j <= n - i; j++) {
+                if (dict.contains(s.substring(i, i + j))) {
+                    ref[i][j] = true;
+                    continue;
+                }
+                
+                for (int k = 1; k < j; k++) {
+                    if (ref[i][k] && ref[k + i][j - k]) ref[i][j] = true;
+                }
+            }
+        }
+        if (!ref[0][n]) return ret;
+        StringBuffer str = new StringBuffer();
+        Break(s, 0, str, dict, ret, ref);
+        return ret;
+    }
+    
+    public void Break(String s, int start, StringBuffer str, Set<String> dict, ArrayList<String> ret, boolean [][] ref) {
+        if (start == s.length()) {
+            String tmp = str.toString();
+            ret.add(tmp.substring(0, tmp.length() - 1));
+            return;
+        }
+        
+        for (int len = 1; len <= s.length() - start; len++) {
+            if (ref[start][len]) {
+                if (dict.contains(s.substring(start, start + len))) {
+                    int beforeAddlen = str.length();
+                    str.append(s.substring(start, start + len) + " ");
+                    Break(s, start + len, str, dict, ret, ref);
+                    str.delete(beforeAddlen, str.length());
+                }
+            }
+        }
+        return;
+    }
+    //--------------------------------------------------------------//
+     public ArrayList<String> wordBreak(String s, Set<String> dict) {
         ArrayList<String> ret = new ArrayList();
         int n = s.length();
         if (n == 0) return ret;
@@ -42,6 +90,7 @@ public class Solution {
             }
         }
     }
+
     //--------------------------------------------------------------//
     public ArrayList<String> wordBreak(String s, Set<String> dict) {
         ArrayList<String> ret = new ArrayList<String>();
