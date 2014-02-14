@@ -19,6 +19,7 @@ public:
 				A[index - 1] = -A[index - 1]; // mark all the location that its according number has shown up in somewhere in this array.
 		}
 
+
 		/* can also like this
         for (int i = 0; i < n; i++) {
             int tmp = abs(A[i]);
