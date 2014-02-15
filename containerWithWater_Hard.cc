@@ -24,6 +24,7 @@ public:
 				int tmp = maxArea(height);
 			return max;
 		} Brute force solution*/
+
 	    int j = height.size() - 1;
     	int i = 0;
 		int m_min = min(height[i], height[j]);
@@ -37,14 +38,14 @@ public:
 
 			if (height[i] < height[j]) {
 					
-					int cur = height[i];
-                    i++;
+				int cur = height[i];
+                i++;
 					while (height[i] < cur) ++i; // in height[i] < cur then the cap will decrease, but if it larger than cur then the cap may increase
 			} else {
 				
-					int cur = height[j];
-                    j--;
-					while (height[j] < cur) j--;
+				int cur = height[j];
+                j--;
+				while (height[j] < cur) j--;
 			}
 		}
 		return max;
