@@ -11,6 +11,7 @@ public:
         int n = candidates.size();
         vector<vector<int>> ret;
         
+        // next bits should be all fromg begin num[i] < target and no duplication at this bit. not all combination should be the same length.
         for (int i = begin; i < n; ) {
             if (candidates[i] == target) {
                 ret.push_back(vector<int>(1, target));
@@ -31,5 +32,6 @@ public:
         }
         return ret;
     }
+
 
 };
