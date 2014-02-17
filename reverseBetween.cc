@@ -11,6 +11,27 @@ struct ListNode {
 };
 class Solution {
 public:
+
+	ListNode *reverseBetween(ListNode *head, int m, int n) {
+	 if (!head || m >= n) return head;
+            ListNode *dummy = new ListNode(0);
+            dummy->next = head;
+            ListNode *pre = dummy;
+            for (int i = 0; i < m - 1; i++) pre = pre->next;
+            ListNode *cur = pre->next;
+            ListNode *tail = cur, *post = cur->next;
+            for (int i = m; i < n; i++) {
+                ListNode *tmp = post->next;
+                post->next = cur;
+                cur = post;
+                post = tmp;
+            }
+            pre->next = cur;
+            tail->next = post;
+    	return dummy->next; 
+    }
+    //----------------------------------------------//
+
 	 ListNode *reverseBetween(ListNode *head, int m, int n) {
         if (!head || m >= n) return head;
         ListNode * dummy = new ListNode(0);
