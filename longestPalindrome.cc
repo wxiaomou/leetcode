@@ -44,6 +44,7 @@ public:
         }
         return len;
     } 
+    
 	//----------------------------------------//
 	string longestPalindrome(string s) {
             int n = s.length();
