@@ -59,7 +59,6 @@ public:
         }
         return ret;
     }
-
 	
 };
 
