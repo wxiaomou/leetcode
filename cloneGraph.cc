@@ -34,6 +34,7 @@ public:
  *     UndirectedGraphNode(int x) : label(x) {};
  * };
  */
+ 
 class Solution {
 public:
     map<UndirectedGraphNode *, UndirectedGraphNode *> hash;
