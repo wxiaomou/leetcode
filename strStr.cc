@@ -31,9 +31,8 @@ public:
         return NULL;
     }
 
+
 //----------------------------------------------------//
-
-
 
 char *strStr(char *haysstack, char *needle) {
         int m = strlen(haysstack);
