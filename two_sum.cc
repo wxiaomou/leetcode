@@ -29,6 +29,23 @@ class Solution {
                 }
                 return ret;
             }
+    //------------------------------------------------------//
+    vector<int> twoSum(vector<int> &numbers, int target) {
+        int n = numbers.size();
+        if (n < 2) return vector<int> ();
+        vector<int> ret;
+        unordered_map<int, int> hash;
+        for (int i = 0; i < n; i++) {
+            if (hash.count(target - numbers[i]) > 0) {
+                ret.push_back(hash[target - numbers[i]] + 1);
+                ret.push_back(i + 1);
+                return ret;
+            } else {
+                hash[numbers[i]] = i;
+            }
+        }
+        return ret;
+    }
            
 };
 
