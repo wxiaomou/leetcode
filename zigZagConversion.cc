@@ -23,6 +23,7 @@ public:
 		return ret;
 	}
 	
+
 	/*
 	string convert(string s, int nRows) {
         if (nRows < 2) return s; //!!! need to handle the special case here, O.W. j += nRows + nRows -  2 will not increase j
