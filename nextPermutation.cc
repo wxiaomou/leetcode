@@ -22,6 +22,7 @@ public:
 		}
 		sort(num.begin() + pos + 1, num.end());
 	}
+    
 	//--------------------------------------------//
 	 void nextPermutation(vector<int> &num) {
         int n = num.size();
