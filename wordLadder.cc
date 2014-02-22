@@ -1,6 +1,46 @@
 // Reference to http://polythinking.wordpress.com/2013/06/09/leetcode-word-ladder/
 class Solution {
 public:
+     int ladderLength(string start, string end, unordered_set<string> &dict) {
+        if (start == end) return 1;
+        int ret = INT_MAX;
+        if (dict.count(start) > 0) dict.erase(start);
+        unordered_set<string> to_erase;
+        queue<string> q;
+        q.push(start);
+        int size = q.size();
+        int lev = 1;
+        while (q.size()) {
+            string cur = q.front();
+            for (int i = 0; i < start.length(); i++) {
+                string tmp = cur;
+                for (char a = 'a'; a <= 'z'; a++) {
+                    tmp[i] = a;
+                    if (tmp == end) return lev + 1;
+                    if (dict.count(tmp) > 0) {
+                        q.push(tmp);
+                        to_erase.insert(tmp);
+                    } 
+                }
+            }
+            q.pop();
+            size--;
+            if (!size) {
+                size = q.size();
+                lev++;
+                for (auto it = to_erase.begin(); it != to_erase.end(); it++) {
+                    string tmp = *it;
+                    dict.erase(tmp);
+                }
+            }
+        }
+        
+        if (ret == INT_MAX) ret = 0;
+        return ret;
+    }
+
+    
+    //--------------------------------------------------------------//
     int ladderLength(string start, string end, unordered_set<string> &dict) {
         if (!start.size()) return 0;
         if (start.size() != end.size()) return 0;
