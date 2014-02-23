@@ -38,7 +38,6 @@ public:
         if (ret == INT_MAX) ret = 0;
         return ret;
     }
-
     
     //--------------------------------------------------------------//
     int ladderLength(string start, string end, unordered_set<string> &dict) {
