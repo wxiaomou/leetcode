@@ -33,6 +33,7 @@ public:
         if (!tmp.size()) ret.push_back(vector<int>());
     	return ret;
     }
+    
 	//--------------------------------------------//
 	vector<vector<int> > permute(vector<int> &num) {
 		vector<vector<int> > res;
