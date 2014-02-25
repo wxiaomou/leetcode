@@ -90,6 +90,48 @@ public:
         if (neg) return -ret;
         return ret;
     }
+
+    //-------------------------------------------------------//
+    int atoi(const char *str) {
+        if (!str) return 0;
+        unsigned long ret = 0;
+        bool op = false, started = false, neg = false;
+        while (*str != '\0') {
+            //spaces
+            if (*str == ' ' && started) {
+                break;
+            } else if(*str == ' ') {
+                while (*str == ' ') str++;
+                continue;
+            }
+            
+            if (*str == '+' || *str == '-') {
+                if (op) return false;
+                if (*str == '-') neg = true;
+                started = true;
+                op = true;
+            } else if (*str >= '0' && *str <= '9') {
+                started = true;
+                if ((INT_MAX - (*str - '0')) / 10 < ret) {
+                    ret = (unsigned int) INT_MAX + 1;
+                    break;
+                }
+                ret *= 10;
+                ret += *str - '0';
+            } else {
+                break;
+            }
+            
+            str++;
+        }
+        if (ret > (unsigned long)INT_MAX) {
+            if (!neg) return INT_MAX;
+            else return INT_MIN;
+        }
+        if (neg) return -(int)ret;
+        return (int)ret;
+    }
+
 };
 int main() {
 	string a("10522545459");
