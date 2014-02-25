@@ -42,13 +42,15 @@ public:
             else 
                 return 0;
         }
-        
+        //operations associated w/ _m should happend here, because above may exceed the matrix's range
         if (_m[i][j] != -1) return _m[i][j];
         if (i < m && s1[i] == s3[i + j]) ret1 = dp(s1, s2, s3, i + 1, j);
         if (j < n && s2[j] == s3[i + j]) ret2 = dp(s1, s2, s3, i, j + 1);
         _m[i][j] = ret1 | ret2;
         return _m[i][j];
     } 
+
+
 	//----------------------------------------------------------//
 	int **m;
     bool isInterleave(string s1, string s2, string s3) {
