@@ -18,7 +18,6 @@ public:
         }
         return ones;
     }
-
     /*
      int singleNumber(int A[], int n) {
         if (!n) return 0;
