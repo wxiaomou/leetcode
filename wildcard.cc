@@ -1,7 +1,4 @@
-#include <iostream>
-#include <string>
-
-using namespace std;
+j
 class Solution {
 	public:
     bool isMatch(const char *s, const char *p) {
@@ -18,7 +15,7 @@ class Solution {
                     while(*ptr == '*') ptr++;
                     if (*ptr == '\0') return true;
                     p = ptr;
-                    s = str;
+                    s = str; //remember the position of str when ptr met "*". if met mismatch afterwards will backtrace here.
                     break;
                 default:
                     if (*str != *ptr) {
@@ -36,6 +33,7 @@ class Solution {
         while (*ptr == '*') ptr++;
         return *ptr == '\0';
     }
+
         //----------------------------------------------//
 		    bool isMatch(const char *s, const char *p) {
                 const char * str = s;
