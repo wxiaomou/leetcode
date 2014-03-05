@@ -8,7 +8,36 @@
  * };
  */
 
-
+class Solution {
+public:
+     int ret;
+    int maxPathSum(TreeNode *root) {
+        if (!root) return 0;
+        ret = INT_MIN;
+        recur(root);
+        return ret;
+    }
+    
+    int recur(TreeNode *root) {
+        if (!root) return -1000;
+        if (!root->left && !root->right) {
+            ret = max(ret, root->val);   
+            return root->val;
+        }
+        int left = recur(root->left);
+        int right = recur(root->right);
+        if (root->left && root->right) {
+            int tmp = max(left, right);
+            ret = max(ret, max(root->val, max(root->val + tmp, root->val + right + left) ) );
+            return max(root->val, root->val + max(left, right));
+        } else {
+            int tmp = root->left ? left : right;
+            ret = max(ret, max(root->val, root->val + tmp) );
+            return max(root->val, root->val + tmp);
+        }
+    }
+}
+//--------------------------------------------//
 class Solution {
 public:
     int ret;
