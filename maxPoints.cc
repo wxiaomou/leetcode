@@ -39,7 +39,7 @@ public:
   所以只要线上的一个点出现过这条线就已经计算过了，j就没必要在从0开始了 (points[j].y - points[i].y) / (points[j].x - points[i].x) ＝＝ (points[i].y - points[j].y) / (points[i].x - points[j].x)
   a, b, c, d 当a出现过时此条线已经计算过了， 到b的时候就不用考虑a了*/
 
-    //---------------------------------------------------------------//
+//---------------------------------------------------------------//
     int maxPoints(vector<Point> &points) {
         if (points.size() <= 1 || isAllSame(points)) return points.size();
         int _max = 2;
