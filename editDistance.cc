@@ -38,5 +38,26 @@ public:
             }
         }
         return matrix[0][0];
+    //----------------------------------------------------------------------//
+         int minDistance(string word1, string word2) {
+        int m = word1.length();
+        int n = word2.length();
+        if (!m || !n) return m ? m : n;
+        vector<int> tmp(n, INT_MAX);
+        vector<vector<int>> ref(m, tmp);
+        dp(word1, word2, m, n, ref, 0, 0);
+        return ref[0][0];
+    }
+    
+    int dp(string &word1, string word2, int m, int n, vector<vector<int>>& ref, int i, int j) {
+        if (i == m) return n - j;
+        if (j == n) return m - i;
+        if (ref[i][j] != INT_MAX) return ref[i][j];
+        if (word1[i] == word2[j]) {
+            ref[i][j] = dp(word1, word2, m, n, ref, i + 1, j + 1);
+        } else {
+            ref[i][j] = min(dp(word1, word2, m, n, ref, i + 1, j + 1), min(dp(word1, word2, m, n, ref, i + 1, j), dp(word1, word2, m, n, ref, i, j + 1)) ) + 1;
+        }
+        return ref[i][j];
     }
 };
