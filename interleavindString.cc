@@ -49,8 +49,7 @@ public:
         _m[i][j] = ret1 | ret2;
         return _m[i][j];
     } 
-
-
+    
 	//----------------------------------------------------------//
 	int **m;
     bool isInterleave(string s1, string s2, string s3) {
