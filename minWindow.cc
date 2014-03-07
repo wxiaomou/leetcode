@@ -7,6 +7,39 @@ using namespace std;
 class Solution {
 public:
 	string minWindow(string S, string T) {
+        int n = S.length(), m = T.length();
+        if (n < m) return "";
+        int start = -1, len = n, total = 0;
+        queue<int> q;
+        unordered_map<char, int> need;
+        unordered_map<char, int> have;
+        for (int i = 0; i < m; i++) need[T[i]]++;
+        for (int i = 0; i < n; i++) {
+            if (need.count(S[i]) > 0) {
+                if (start == -1) {
+                    start = i;
+                }
+                q.push(i);
+                have[S[i]] ++;
+                if (have[S[i]] <= need[S[i]]) total++;
+                if (total == m) {
+                    len = min(i - start + 1, len);
+                    while (have[S[q.front()]] > need[S[q.front()]]) {
+                        have[S[q.front()]]--;
+                        q.pop();
+                        if (i - q.front() + 1 < len) {
+                            start = q.front();
+                            len = i - q.front() + 1;
+                        }
+                    }
+                }
+            }
+        }
+        if (total < m) return "";
+        return S.substr(start, len);
+    }
+	//-----------------------------//
+	string minWindow(string S, string T) {
 		        int need[256];
     	int have[256] = {0};
 
