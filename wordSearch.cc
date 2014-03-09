@@ -5,7 +5,43 @@
 using namespace std;
 class Solution {
 public:
-		bool **visit;
+	bool exist(vector<vector<char> > &board, string word) {
+        int m = board.size();
+        if (!m) return false;
+        int n = board[0].size();
+        int x[] = {-1, 0, 1, 0};
+        int y[] = {0, -1, 0, 1};
+        vector<bool> tmp(n, false);
+        vector<vector<bool>> visited(m, tmp);
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (dfs(board, word, i, j, 0, visited, x, y)) return true;
+            }
+        }
+        return false;
+    }
+    
+    bool dfs(vector<vector<char> > &board, string &word, int i, int j, int k, vector<vector<bool>> &visited, int x[], int y[]) {
+        int m = board.size();
+        int n = board[0].size();
+        if (k == word.length()) return false;
+        if (visited[i][j]) return false;
+        
+        if (k == word.length() - 1 && board[i][j] == word[k]) return true;
+        
+        if (!visited[i][j] && board[i][j] == word[k]) {
+            for (int p = 0; p < 4; p++) {
+                if ((i + y[p]) >= 0 && (i + y[p]) < m && (j + x[p]) >= 0 && (j + x[p]) < n) {
+                    visited[i][j] = true;
+                    if (dfs(board, word, i + y[p], j + x[p], k + 1, visited, x, y)) return true;
+                    visited[i][j] = false;
+                }
+            }
+        }
+        return false;
+    }
+//---------------------------------------------------------//
+	bool **visit;
     bool exist(vector<vector<char> > &board, string word) {
 			int m = board.size();
 			int n = board[0].size();
