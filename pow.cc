@@ -24,7 +24,6 @@ public:
 
 		if (neg) 
 			return 1.0 / ret;
-		else 
-			return ret;
+		return ret;
 	}
 };
