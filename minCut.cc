@@ -23,7 +23,6 @@ public:
         }
         return D[0];
     }
-    
     //------------------------------------------------//
     int minCut(string s) {
         if (!s.size()) return 0;
