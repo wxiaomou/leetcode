@@ -12,6 +12,33 @@ public:
         if (!head) return NULL;
         if (!head->next) return head;
         ListNode *pre = head, *cur = head;
+        while (cur->next && cur->next->next) {
+            cur = cur->next->next;
+            pre = pre->next;
+        }
+        ListNode *post = sortList(pre->next);
+        pre->next = NULL;
+        pre = sortList(head);
+        head = NULL;
+        while (pre && post) {
+            if (!head) {
+                head = pre->val < post->val ? pre : post;
+                cur = head;
+            } else {
+                cur->next = pre->val < post->val ? pre : post;
+                cur = cur->next;
+            }
+            if (pre->val < post->val) pre = pre->next;
+            else post = post->next;
+        }
+        cur->next = pre ? pre : post;
+        return head;
+    }
+    //-----------------------------//
+    ListNode *sortList(ListNode *head) {
+        if (!head) return NULL;
+        if (!head->next) return head;
+        ListNode *pre = head, *cur = head;
         while (cur) {
             if (cur->next)
                 cur = cur->next->next;
