@@ -23,7 +23,6 @@ public:
             return (med(A, m, B, n, (m + n) / 2, 1, m) + med(A, m, B, n, (m + n) / 2 + 1, 1, m)) / 2.0;
         }
     }
-    
     int med(int A[], int m, int B[], int n, int k, int left, int right) {
         //!!!k, left, right here are not the index, the start from 1.
         if (left > right)
