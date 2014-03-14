@@ -134,6 +134,7 @@ public:
 
 };
 
+
 int main(int argc, char **argv) {
 	Solution sol;
 	string s1("aabaac");
