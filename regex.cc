@@ -15,6 +15,41 @@ public:
             return isMatch(s, p + 2);
         }
     }
+//------------------------------------//
+ bool isMatch(const char *s, const char *p) {
+        if (*p == 0) return *s == 0;
+        int m = strlen(s), n = strlen(p);
+        vector<int> tmp(n, -1);
+        vector<vector<int>> ref(m + 1, tmp);
+        dp(s, 0, m, p, 0, n, ref);
+        return ref[0][0];
+    }
+    
+    int dp(const char *s, int i, int m, const char *p, int j, int n, vector<vector<int>> &ref) {
+        if (j == n) {
+            if (i == m) return 1;
+            else return 0;
+        }
+        if (ref[i][j] != -1) return ref[i][j];
+        if (j + 1 < n && p[j + 1] == '*') {
+            int k = i;
+            while ((s[k] == p[j] || p[j] == '.') && k < m) {
+                if (dp(s, k, m, p, j + 2, n, ref) > 0) {
+                    return ref[i][j] = 1;
+                } 
+                k++;
+            }
+            return ref[i][j] = dp(s, k, m, p, j + 2, n, ref);
+        } else {
+            if ((s[i] == p[j] || p[j] == '.') && i < m) return ref[i][j] = dp(s, i + 1, m, p, j + 1, n, ref);
+            else return ref[i][j] = 0;
+        }
+    }
+
+
+
+
+
 
     //-----------------------------//
     bool isMatch(const char *s, const char *p) {
