@@ -14,7 +14,6 @@ public:
     
         return -1;
     }
-    
     //-----------------------------------------------//
     int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
         // IMPORTANT: Please reset any member data you declared, as
