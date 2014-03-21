@@ -6,6 +6,56 @@ using namespace std;
 
 class Solution {
 public:
+	 string minWindow(string S, string T) {
+        int m = S.length(), n = T.length();
+        if (m < n) return "";
+        int cnt = 0, start = -1, begin = 0, end = m - 1;
+        unordered_map<char, int> need;
+        unordered_map<char, int> have;
+        for (int i = 0; i < n; i++)  {
+            if (need.count(T[i]) == 0)
+                need[T[i]] = 1;
+            else
+                need[T[i]] ++;
+        }
+        
+        for (int i = 0; i < m; i++) {
+            if (need.count(S[i]) > 0) {
+                if (start < 0) start = i;
+                
+                if (have.count(S[i]) == 0)
+                    have[S[i]] = 1;
+                else
+                    have[S[i]]++;
+                    
+                if (have[S[i]] <= need[S[i]]) cnt++;
+                
+                if (cnt == n) {
+                    int j = start;
+                    while (j <= i) {
+                        if (need.count(S[j]) > 0) {
+                            if (have[S[j]] > need[S[j]]) {
+                                have[S[j]]--;
+                            } else if (have[S[j]] == need[S[j]]) {
+                                start = j;
+                                break;
+                            }
+                        }
+                        j++;
+                    }
+                    if (i - start < end - begin) {
+                        begin = start;
+                        end = i;
+                    } 
+                }
+            }
+        }
+        if (cnt == n)
+            return S.substr(begin, end - begin + 1);
+        return "";
+    }
+
+	//-----------------------------------------------//
 	string minWindow(string S, string T) {
         int n = S.length(), m = T.length();
         if (n < m) return "";
