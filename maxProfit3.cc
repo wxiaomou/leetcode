@@ -1,6 +1,24 @@
 class Solution {
 public:
     int maxProfit(vector<int> &prices) {
+        int n = prices.size();
+        if (n < 2) return 0;
+        vector<int> Lmin(n, 0);
+        int _min = prices[0], i = 1, ret = 0;
+        for (int i = 1; i < n; i++) {
+            _min = min(prices[i], _min);
+            Lmin[i] = max(prices[i] - _min, Lmin[i - 1]);
+        }
+        int _max = prices[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            _max = max(_max, prices[i]);
+            ret = max(ret, _max - prices[i] + Lmin[i]);
+        }
+        return ret;
+    }
+    
+    //----------------------------------------------------//
+    int maxProfit(vector<int> &prices) {
         // IMPORTANT: Please reset any member data you declared, as
         // the same Solution instance will be reused for each test case.
         if (prices.size() <= 1) return 0;
@@ -22,6 +40,7 @@ public:
         }
         return ret;
     }
+
     //--------------------------------------------------//
     int maxProfit(vector<int> &prices) {
         int n = prices.size();
