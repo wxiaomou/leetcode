@@ -23,7 +23,30 @@ public:
         return head;
     }
 };*/
-
+//BFS
+  UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
+        if (!node) return NULL;
+        queue<UndirectedGraphNode *> q;
+        unordered_map<UndirectedGraphNode *, UndirectedGraphNode *> hash;
+        q.push(node);
+        UndirectedGraphNode *root = new UndirectedGraphNode(node->label);
+        hash[node] = root;
+        while (q.size()) {
+            UndirectedGraphNode *tmp = hash[q.front()];
+            for (auto it = q.front()->neighbors.begin(); it != q.front()->neighbors.end(); it++) {
+                if (hash.count(*it) > 0) {
+                    tmp->neighbors.push_back(hash[*it]);
+                } else {
+                    UndirectedGraphNode *_tmp = new UndirectedGraphNode((*it)->label);
+                    hash[*it] = _tmp;
+                    tmp->neighbors.push_back(hash[*it]);
+                    q.push(*it);
+                }
+            }
+            q.pop();
+        }
+        return root;
+    }
 
 
 /**
