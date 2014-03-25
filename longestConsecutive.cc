@@ -25,6 +25,7 @@ nt longestConsecutive(vector<int> &num) {
         }
         return last - first + 1;
     }
+    
     //------------------------------------//
 
     int longestConsecutive(vector<int> &num) {
