@@ -30,6 +30,9 @@ public:
             
         int i = (left + right) / 2 - 1; 
         int mid = i + 1; // there are mid - 1 elements less than A[i]
+
+        // int mid = (left + right) / 2;
+        // int i = mid - 1;
         int j = k - mid; // j elements in B which should less than A[i]
         
         //special case
