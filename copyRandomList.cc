@@ -6,6 +6,7 @@
  *     RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
  * };
  */
+ 
 class Solution {
 public:
     map<RandomListNode *, RandomListNode *> hash;
