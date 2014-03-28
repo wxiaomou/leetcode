@@ -4,6 +4,32 @@
 using namespace std;
 class Solution {
 public:
+    vector<int> searchRange(int A[], int n, int target) {
+        if (!n || A[n - 1] < target) return vector<int> (2, -1);
+        vector<int> ret;
+        if (search(A, 0, n - 1, target, ret, n))
+            return ret;
+        return vector<int> (2, -1);
+    }
+    
+    bool search(int A[], int start, int end, int target, vector<int> &ret, int n) {
+        if (start > end) return false;
+        int mid = (start + end) / 2;
+        
+        if (A[mid] == target) {
+            int i = mid - 1, j = mid + 1;
+            while (i >= 0 && A[i] == target) i--;
+            while (j < n && A[j] == target) j++;
+            ret.push_back(++i);
+            ret.push_back(--j);
+            return true;
+        } else if (A[mid] > target) {
+            return search(A, start, mid - 1, target, ret, n);
+        } else {
+            return search(A, mid + 1, end, target, ret, n);
+        }
+    }
+    //----------------------------------------------//
 	vector<int> searchRange(int A[], int n, int target) {
         if (!n) return vector<int>(2, -1);
         if (!(target >= A[0] && target <= A[n - 1])) return vector<int>(2, -1);
