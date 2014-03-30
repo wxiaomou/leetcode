@@ -7,9 +7,11 @@ public:
 	int minDistance(string word1, string word2) {
         int m = word1.length();
         int n = word2.length();
-        if (!m || !n) return m ? m : n;
         vector<int> tmp(n + 1, INT_MAX);
         vector<vector<int>> dp(m + 1, tmp);
+        // When both of the strings are of size 0, the cost is 0. When only one of the string is zero, 
+        // we need edit operations as that of non-zero length string. Mathematically,
+        // E(0, 0) = 0, E(i, 0) = i, E(0, j) = j
         for (int j = 0; j <= n; j++) dp[0][j] = j; // j means, if start from here, need to delete j elements in word2 first, so the cost is j here
         for (int i = 1; i <= m; i++) dp[i][0] = i;
         for (int i = 1; i <= m; i++) {
@@ -23,7 +25,7 @@ public:
         }
         return dp[m][n];
     }
-    
+
     
 	//---------------------------------------//
 	int minDistance(string word1, string word2) {
