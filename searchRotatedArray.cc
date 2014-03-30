@@ -3,8 +3,6 @@
 using namespace std;
 class Solution {
 public:
-
-
 // key: use A[mid] and A[start] to find the increase part, if target inside the increase part then choose accoeding part else choose the oposite
  int search(int A[], int n, int target) {
         if (!n) return -1;
@@ -34,6 +32,7 @@ public:
         
         return -1;
     }
+
   //------------------O(n)---------------------//
 	int search(int A[], int n, int target) {
 		int i = 0;
