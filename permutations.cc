@@ -4,6 +4,29 @@
 using namespace std;
 class Solution {
 public:
+	//saap one
+	 vector<vector<int>> permute(vector<int> &num) {
+        int n = num.size();
+        if (!n) return vector<vector<int>>();
+        vector<vector<int>> ret;
+        build(num, 0, ret);
+        return ret;
+    }
+    
+    void build(vector<int> &num, int start, vector<vector<int>> &ret) {
+        if (start == num.size()) {
+            ret.push_back(num);
+            return;
+        }
+        build(num, start + 1, ret);
+        for (int i = start + 1; i < num.size(); i++) {
+            swap(num[start], num[i]);
+            build(num, start + 1, ret);
+            swap(num[start], num[i]);
+        }
+    }
+
+	//---------------------------------------------//
 	vector<vector<int> > permute(vector<int> &num) {
         int n = num.size();
         if (!n) return vector<vector<int>>();
