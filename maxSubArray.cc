@@ -20,24 +20,8 @@ public:
         }
         return ret;
     }
+    
 	//-----------------------//
-	int maxSubArray2(int A[], int n) {
-		if (0 == n) return 0;
-		int cur_sum = 0;
-		int m_max = 0;
-
-		for (int i = 0; i < n; ++i) {
-			cur_sum += A[i];
-
-			if (cur_sum < 0) {
-				cur_sum = 0;
-			}
-
-		m_max = max(cur_sum, m_max);
-		}
-
-		return m_max;
-	}
 
 	    int maxSubArray(int A[], int n) {
         if (1 == n)
