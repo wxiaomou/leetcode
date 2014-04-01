@@ -23,4 +23,5 @@ class Solution {
         root->right = _build(num, ((end + begin) / 2) + 1, end);
         return root;
     }
+    
 };
