@@ -25,4 +25,36 @@ class Solution {
         }   
         return ret;
     }
+    //---------------------------------//
+     vector<int> preorderTraversal(TreeNode *root) {
+        if (!root) return vector<int>();
+        stack<TreeNode *> s;
+        vector<int> ret;
+        TreeNode *cur = root;
+        ret.push_back(cur->val);
+        s.push(cur);
+        cur = cur->left;
+        while (cur) {
+            ret.push_back(cur->val);
+            s.push(cur);
+            cur = cur->left;
+        }
+        
+        while (s.size()) {
+            cur = s.top();
+            s.pop();
+            if (cur->right) {
+                cur = cur->right;
+                ret.push_back(cur->val);
+                s.push(cur);
+                cur = cur->left;
+                while(cur) {
+                    ret.push_back(cur->val);
+                    s.push(cur);
+                    cur = cur->left;
+                }
+            }
+        }
+        return ret;
+    }
 };
