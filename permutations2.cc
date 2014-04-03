@@ -34,6 +34,7 @@ public:
     	return ret;
     }
     
+    
 	//--------------------------------------------//
 	vector<vector<int> > permute(vector<int> &num) {
 		vector<vector<int> > res;
