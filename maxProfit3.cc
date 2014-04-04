@@ -3,6 +3,22 @@ public:
     int maxProfit(vector<int> &prices) {
         int n = prices.size();
         if (n < 2) return 0;
+        int ret = 0, _max = prices[n - 1], _min = prices[0];
+        vector<int> left(n, 0);
+        for (int i = n - 2; i >= 0; i--) {
+            _max = max(prices[i], _max);
+            left[i] = max(_max - prices[i], left[i + 1]);
+        }
+        for (int i = 1; i < n; i++) {
+            _min = min(prices[i], _min);
+            ret = max(ret, prices[i] - _min + left[i]);
+        }
+        return ret;
+    }
+    //------------------------------------------------------//
+    int maxProfit(vector<int> &prices) {
+        int n = prices.size();
+        if (n < 2) return 0;
         vector<int> Lmin(n, 0);
         int _min = prices[0], i = 1, ret = 0;
         for (int i = 1; i < n; i++) {
