@@ -32,26 +32,26 @@ public:
 				return false;
 		}
 
-		// iterate by level and compare
-        bool isSymmetric2(TreeNode *root) {
-            if (!root) return true;
-            queue<TreeNode *> l;
-            queue<TreeNode *> r;
-            l.push(root->left);
-            r.push(root->right);
-            while (l.size() && r.size()) {
-                TreeNode *left = l.front();
-                TreeNode *right = r.front();
-                l.pop();
-                r.pop();
-                if ((left && !right) || (!left && right)) return false;
-                if (left) {
-                    if (left->val != right->val) return false;
-                    l.push(left->left);
-                    l.push(left->right);
-                    r.push(right->right);// !!attention Mirror!!
-                    r.push(right->left);
-                }
+	// iterate by level and compare
+    bool isSymmetric2(TreeNode *root) {
+        if (!root) return true;
+        queue<TreeNode *> l;
+        queue<TreeNode *> r;
+        l.push(root->left);
+        r.push(root->right);
+        while (l.size() && r.size()) {
+            TreeNode *left = l.front();
+            TreeNode *right = r.front();
+            l.pop();
+            r.pop();
+            if ((left && !right) || (!left && right)) return false;
+            if (left) {
+                if (left->val != right->val) return false;
+                l.push(left->left);
+                l.push(left->right);
+                r.push(right->right);// !!attention Mirror!!
+                r.push(right->left);
+            }
         }
         return true;
     }
