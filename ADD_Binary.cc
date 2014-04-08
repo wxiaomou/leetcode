@@ -45,6 +45,7 @@ public:
         }
         return c;
     }
+    
     /*string addBinary(string a, string b) {
     	int i = a.length() - 1;
 			int j = b.length() - 1;
