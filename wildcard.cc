@@ -33,7 +33,6 @@ class Solution {
         while (*ptr == '*') ptr++;
         return *ptr == '\0';
     }
-
     //----------------------------------------------//
 	    bool isMatch(const char *s, const char *p) {
               const char * str = s;
