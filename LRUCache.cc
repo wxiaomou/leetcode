@@ -72,7 +72,6 @@ public:
         }
     }
 };
-
 // Simplify one
 struct Node {
      int val;
