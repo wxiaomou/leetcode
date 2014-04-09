@@ -21,6 +21,7 @@ public:
         }
         return ret[0][0];
     }
+    
 	//---------------------------------------//
 	int **matrix;		
 	int minPathSum(vector<vector<int> > &grid) {
