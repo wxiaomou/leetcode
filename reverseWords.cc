@@ -27,3 +27,32 @@ void reverseWords(string &s) {
         }        
         return;
     }
+//---------------------------------------//
+    void reverseWords(string &s) {
+        int n = s.length();
+        reverse(s);
+        string ret = "";
+        for (int i = 0; i < n;) {
+            while (i < n && s[i] == ' ') i++;
+            if (i < n) {
+                int j = i + 1;
+                while (j < n && s[j] != ' ') j++;
+                string tmp = s.substr(i, j - i);
+                reverse(tmp);
+                ret += " " + tmp;
+                i = j;
+            }
+        }
+        if (!ret.length()) s = ret;
+        else s = ret.substr(1);
+    }
+    
+    void reverse(string &s) {
+        int n = s.length();
+        if (!n) return;
+        for (int i = 0; i < n / 2; i++) {
+            char tmp = s[i];
+            s[i] = s[n - 1 - i];
+            s[n - 1 - i] = tmp;
+        }
+    }
