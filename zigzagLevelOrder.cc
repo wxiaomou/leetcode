@@ -54,4 +54,38 @@ public:
         }
         return ret;
     }
+
+    //--------------BETTER------------------//
+     vector<vector<int>> zigzagLevelOrder(TreeNode *root) {
+       if (!root) return vector<vector<int>>();
+       stack<TreeNode *> q;
+       stack<TreeNode *> s;
+       bool isQ = true;
+       q.push(root);
+       vector<vector<int>> ret;
+       while (q.size() || s.size()) {
+           vector<int> tmp;
+           if (isQ) {
+               while (q.size()) {
+                   TreeNode *t = q.top();
+                   q.pop();
+                   tmp.push_back(t->val);
+                   if (t->left) s.push(t->left);
+                   if (t->right) s.push(t->right);
+               }
+               isQ= false;
+           } else {
+               while (s.size()) {
+                   TreeNode *t = s.top();
+                   s.pop();
+                   tmp.push_back(t->val);
+                   if (t->right) q.push(t->right);
+                   if (t->left) q.push(t->left);
+               }
+               isQ = true;
+           }
+           ret.push_back(tmp);
+       }
+       return ret;
+    }
 };
