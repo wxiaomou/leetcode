@@ -41,7 +41,6 @@ public:
 
 			return head;
     }
-
     /* no copy way
     ListNode *removeNthFromEnd(ListNode *head, int n) {
         if (!head) return head;
