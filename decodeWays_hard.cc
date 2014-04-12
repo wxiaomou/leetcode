@@ -4,6 +4,31 @@ using namespace std;
 class Solution {
 public:
     int numDecodings(string s) {
+        if (!s.length()) return 0;
+        int ref[s.length()];
+        for (int i = 0; i < s.length(); i++) ref[i] = -1;
+        return dp(s, 0, ref);
+    }
+        
+    int dp(string &s, int i, int ref[]) {
+        if (i == s.length()) return 1;
+        if (ref[i] != -1) return ref[i];
+        if (s[i] == '0') {
+            ref[i] = 0;
+            return 0;
+        }
+        int ret = 0;
+        if (i < s.length() - 1) {
+            string tmp = s.substr(i, 2);
+            if (atoi(tmp.c_str()) <= 26) ret += dp(s, i + 2, ref);
+        }
+        ret += dp(s, i + 1, ref);
+        ref[i] = ret;
+        return ret;
+    }
+    
+    //------------------------------------------//
+    int numDecodings(string s) {
         int n = s.length();
         if (!n) return 0;
         int ref[n];
