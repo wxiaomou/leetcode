@@ -43,6 +43,7 @@ public:
 
 			return res;
 		}*/
+			
 	// better way
 	string countAndSay(int n) {
         if (!n) return "";
