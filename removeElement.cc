@@ -4,6 +4,19 @@ using namespace std;
 
 class Solution {
 public:
+    int removeElement(int A[], int n, int elem) {
+        if (!n) return 0;
+        int i = 0, j = 0;
+        while (j < n) {
+            if (A[j] == elem) {
+                j++;
+                continue;
+            }
+            A[i++] = A[j++];
+        }
+        return i;
+    }
+    //-----------------------------------//
 	int removeElement(int A[], int n, int elem) {
         if (!n) return 0;
         int i = 0;
@@ -19,7 +32,7 @@ public:
         }
         return i;
     }
-    
+    //--------------------------------//
 	int removeElement(int A[], int n, int elem) {
 		 if (!n)
     		return 0;
