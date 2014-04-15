@@ -4,6 +4,45 @@
 using namespace std;
 class Solution {
 public:
+	// one pass
+	 int romanToInt(string s) {
+        int ret = 0;
+        int n = s.length();
+        char pre = ' ';
+        for (int i = n - 1; i >= 0; i--) {
+            switch(s[i]) {
+                case 'I':
+                    if (pre == 'V' || pre == 'X') ret -= 1;
+                    else ret += 1;
+                    break;
+                case 'V':
+                    if (pre == 'X') ret -= 5;
+                    else ret += 5;
+                    break;
+                case 'X':
+                    if (pre == 'L' || pre == 'C') ret -= 10;
+                    else ret += 10;
+                    break;
+                case 'L':
+                    if (pre == 'C') ret -= 50;
+                    else ret += 50;
+                    break;
+                case 'C':
+                    if (pre == 'D' || pre == 'M') ret -= 100;
+                    else ret += 100;
+                    break;
+                case 'D':
+                    if (pre == 'M') ret -= 500;
+                    else ret += 500;
+                    break;
+                case 'M':
+                    ret += 1000;
+                    break;
+            }
+            pre = s[i];
+        }
+        return ret;
+    }
 	//better solution
 	 int romanToInt(string s) {
         int n = s.length();
