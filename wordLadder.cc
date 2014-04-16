@@ -19,7 +19,7 @@ public:
                     if (tmp == end) return lev + 1;
                     if (dict.count(tmp) > 0) {
                         q.push(tmp);
-                        to_erase.insert(tmp);
+                        to_erase.insert(tmp); // important
                     } 
                 }
             }
@@ -38,7 +38,6 @@ public:
         if (ret == INT_MAX) ret = 0;
         return ret;
     }
-    
     //--------------------------------------------------------------//
     int ladderLength(string start, string end, unordered_set<string> &dict) {
         if (!start.size()) return 0;
