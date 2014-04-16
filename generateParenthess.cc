@@ -5,6 +5,22 @@ using namespace std;
 
 class Solution {
 public: 
+	 vector<string> generateParenthesis(int n) {
+        if (!n) return vector<string>();
+        vector<string> ret;
+        recur(n, n, ret, "");
+        return ret;
+    }
+    
+    void recur(int left, int right, vector<string> &ret, string tmp) {
+        if (!right) {
+            ret.push_back(tmp);
+            return;
+        }
+        if (right > left) recur(left, right - 1, ret, tmp + ")");
+        if (left) recur(left - 1, right, ret, tmp + "(");
+    }
+	//------------------------------------//
 	vector<string> generateParenthesis(int n) {
         if (!n) vector<string>();
         return _gen(n, n);
