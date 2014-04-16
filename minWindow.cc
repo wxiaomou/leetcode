@@ -88,7 +88,7 @@ public:
         if (total < m) return "";
         return S.substr(start, len);
     }
-	//-----------------------------//
+	//--------------Good---------------//
 	string minWindow(string S, string T) {
 		        int need[256];
     	int have[256] = {0};
