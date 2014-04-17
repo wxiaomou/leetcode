@@ -27,7 +27,6 @@ class Solution {
         if (l && r && (abs(h1 - h2) <= 1)) return true;
         else return false;
     }
-
     //--------------------------------------//
     bool ret = true; 
     bool isBalanced(TreeNode *root) {
