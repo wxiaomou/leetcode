@@ -7,6 +7,27 @@ using namespace std;
 
 class Solution {
 	public:
+		 int threeSumClosest(vector<int> &num, int target) {
+        int n = num.size();
+        if (n < 3) return -1;
+        int ret = INT_MAX, diff = INT_MAX;
+        
+        sort(num.begin(), num.end());
+        for (int i = 0; i < n; i++) {
+            int j = i + 1, k = n - 1;
+            while (j < k) {
+                if (abs(num[i] + num[j] + num[k] - target) < diff) {
+                    ret = num[i] + num[j] + num[k];
+                    diff = abs(num[i] + num[j] + num[k] - target);
+                }
+                if (num[i] + num[j] + num[k] == target) return target;
+                else if (num[i] + num[j] + num[k] > target) k--;
+                else j++;
+            }
+        }
+        return ret;
+    }
+		//---------------------------------------------------//
 		int threeSum(vector<int> &num, int target) { // Attention when vec def >> should be > > !!!!!!!!!!!!111
 			if (num.size() < 3)
 				return 0;
