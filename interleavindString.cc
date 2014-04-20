@@ -5,6 +5,42 @@ using namespace std;
 
 class Solution {
 public:
+ bool isInterleave(string s1, string s2, string s3) {
+        int m = s1.length(), n = s2.length(), l = s3.length();
+        if (m + n != l) return false;
+        if (!m || !n) return m ? s1 == s3 : s2 == s3;
+        vector<int> tmp (n, -1);
+        vector<vector<int>> matrix(m, tmp);
+        return (dp(0, 0, 0, s1, s2, s3, matrix) == 1);
+    }
+    
+    int dp(int i, int j, int k, string s1, string s2, string s3, vector<vector<int>> &matrix) {
+        int m = s1.length(), n = s2.length(), l = s3.length();
+        if (k == l) return 1;
+        if (i == m) {
+            if (s2[j] == s3[k])
+                return dp(i, j + 1, k + 1, s1, s2, s3, matrix);
+            return 0;
+        }
+        if (j == n) {
+            if (s1[i] == s3[k])
+                return dp(i + 1, j, k + 1, s1, s2, s3, matrix);
+            return 0;
+        }
+        if (matrix[i][j] != -1) return matrix[i][j];
+        if (s1[i] == s3[k]) {
+            matrix[i][j] = dp(i + 1, j, k + 1, s1, s2, s3, matrix);
+            if (matrix[i][j] == 1) return 1;
+        }
+        
+        if (s2[j] == s3[k]) {
+            matrix[i][j] = dp(i, j + 1, k + 1, s1, s2, s3, matrix);
+            if (matrix[i][j] == 1) return 1;
+        }
+        return 0;
+    }
+
+	//---------------------------------------------------//
 	int ** _m;
     bool isInterleave(string s1, string s2, string s3) {
         int m = s1.length();
@@ -132,7 +168,7 @@ public:
 			return 0;
 	}
 
-};
+};g
 
 
 int main(int argc, char **argv) {
