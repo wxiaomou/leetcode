@@ -15,7 +15,7 @@ public:
 		for (int i = 0; i < L.size(); i++) l[L[i]]++;
 		int count = 0;
 		for(int i = 0; i <= S.length() - l_num * L.size(); i++) {
-			count = 0;
+			count = 0;// can be duplicate strings, so need this one
 			s.clear();
 			for (int j = 0; j < L.size(); j++) {
 				string str = S.substr(i + l_num * j, l_num);
