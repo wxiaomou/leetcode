@@ -20,8 +20,8 @@ public:
         for (int i = 0; i < n; i++) ret += candies[i];
         return ret;
     }
-    //-----------------------------------//
-    int candy(vector<int> &ratings) {
+    
+    //-----------------------------------//g
         // Note: The Solution object is instantiated only once and is reused by each test case.
         if (!ratings.size()) return 0;
         int ret = ratings.size();
