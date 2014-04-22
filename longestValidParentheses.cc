@@ -37,7 +37,6 @@ public:
         }
         return len;
     }
-    
 	//--------------------------------------//
 	int longestValidParentheses(string s) {
         int n = s.length();
