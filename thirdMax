@@ -1,0 +1,24 @@
+public class Solution {
+    public int thirdMax(int[] nums) {
+        Long one = Long.MIN_VALUE;
+        Long two = Long.MIN_VALUE;
+        Long three = Long.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            Long num = new Long(nums[i]);
+            if (num > one) {
+                Long tmp = one;
+                one = num;
+                num = tmp;
+            }
+            if (num > two && num < one) {
+                Long tmp = two;
+                two = num;
+                num = tmp;
+            } 
+            if (num > three && num < two) {
+                three = num;
+            }
+        }
+        return (three > Long.MIN_VALUE) ? three.intValue() : one.intValue();
+    }
+}
