@@ -4,7 +4,7 @@ public class Solution {
         if (len == 0) return 0;
         int min = 1;
         int max = len - 1;
-        while (min <= max) {
+        while (min < max) {
             int mid = (min + max) / 2;
             int cnt = 0;
             for (int tmp : nums) {
@@ -13,7 +13,8 @@ public class Solution {
                 } 
             }
             if (cnt > mid) {
-                max = mid - 1;
+                // (min + max) / 2 will lose one, eg (1 + 4) / 2  = 2, so we can give mid to max rather than mid - 1.
+                max = mid;
             } else {
                 min = mid + 1;
             }
