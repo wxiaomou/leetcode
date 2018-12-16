@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+void inorder(TreeNode *root, TreeNode*& leftLast, TreeNode*& head) {
+    if (!root) return;
+    inorder(root->left, leftLast, head);
+    if (!head) {
+        head = root;
+        leftLast = root;
+    } else {
+        leftLast->right = root;
+        root->left = leftLast;
+        leftLast = root;
+    }
+    inorder(root->right, leftLast, head);
+}
+
+TreeNode* convert(TreeNode *root) {
+    if (!root) return NULL;
+    TreeNode* head = NULL;
+    TreeNode* leftLast = NULL;
+    inorder(root, leftLast, head);
+    head->left = leftLast;
+    leftLast->right = head;
+    return head;
+}
+
+// Display Circular Link List 
+void displayCList(TreeNode *head) 
+{ 
+    cout << "Circular Linked List is :\n"; 
+    TreeNode *itr = head; 
+    do
+    { 
+        cout << itr->val <<" "; 
+        itr = itr->right; 
+    } while (head!=itr); 
+    cout << "\n"; 
+} 
+  
+// Driver Program to test above function 
+int main() 
+{ 
+    TreeNode *root = new TreeNode(10); 
+    root->left = new TreeNode(12); 
+    root->right = new TreeNode(15); 
+    root->left->left = new TreeNode(25); 
+    root->left->right = new TreeNode(30); 
+    root->right->left = new TreeNode(36); 
+  
+    TreeNode *head = convert(root); 
+    displayCList(head); 
+  
+    return 0; 
+} 
